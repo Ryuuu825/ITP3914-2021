@@ -19,6 +19,9 @@
 ``` 
 java -cp "bin' Main
 ```
+```
+make excute
+```
 ***
 
 
