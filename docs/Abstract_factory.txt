@@ -1,0 +1,20 @@
+class Player
++ bool win
+- std::string card[][]
+- char name[];
+- const String cross = "XX";
++ void update_array(int row , int column)
+
+class Game
+- Player player_set[];
++ register_player(Player... players)
++ void update_card(int row , int column);
++ bool is_win();
+- bool check_row();
+- bool check_column();
+- bool check_diagonal();
+
+class Main
++ Scanner sc;
++ Player player1;
++ Player playee2;
