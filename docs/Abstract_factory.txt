@@ -1,20 +1,38 @@
 class Player
-+ bool win
-- std::string card[][]
+- Card card;
 - char name[];
-- const String cross = "XX";
-+ void update_array(int row , int column)
 
-class Game
-- Player player_set[];
-+ register_player(Player... players)
-+ void update_card(int row , int column);
-+ bool is_win();
++ Player(std::string name);
++ player(std::string name , Card card);
++ std::string[][] get_card();
++ std::string toString();
+
+class Card
++ Card(int row_size , int column_size);
++ Card(std::string array[][]);
++ bool bingo();
++ void update(int);
+
+- std::string array[][];
+- std::string[][] random_generate_array();
+- std::string[][] get_card();
 - bool check_row();
 - bool check_column();
 - bool check_diagonal();
+
+class Game
+- Player player_set[];
+- int input[];
++ register_player(Player... players)
++ void update_card(int);
++ void show_card(Player player);
+
++ bool is_win();
++ bool availble_input(int number);
+
 
 class Main
 + Scanner sc;
 + Player player1;
 + Player playee2;
++ Game Game1;
