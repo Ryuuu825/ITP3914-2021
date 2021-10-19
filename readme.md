@@ -16,7 +16,7 @@
 ***
 ## How to run ?
 
-> ***`java -cp "bin' Main`***
+``` java -cp "bin' Main ```
 ***
 
 
