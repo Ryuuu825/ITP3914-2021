@@ -33,5 +33,5 @@ The porgram will display two players' card on the screen. To meet the requirment
 
 A player finds the selected numbers are arranged on their card in same row / column / diagonal . 
 
-<img src="win_example.png" style="width:200px;"/>
+<img src="./assets/win_example.png" style="width:200px;"/>
 
