@@ -2,7 +2,7 @@
 
 # build date
 DATE=$(date)
-JAVA_VERSION=$(java -version 2>&1 | grep 'version' | awk '{printf $2}' )
+JAVA_VERSION=$(java -version 2>&1 | grep 'version' | awk '{printf $3}' )
 
 #----------------------------------------------
 
@@ -50,7 +50,7 @@ then
   printf "[Compiling Fail]\n" >> $TESTFILE
   printf "[Compiling Fail]\n"
 
-  error_message=$(cat temp.log)
+  error_message=$(cat temp.log |  grep 'error')
   printf  "\noutput :\n\t" >> $TESTFILE
   echo $error_message >> $TESTFILE 
 
