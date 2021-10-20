@@ -12,14 +12,14 @@ public class Player {
         return playerName;
     }
 
+    public boolean bingo() {
+        return this.playerCard.haveBingo();
+    }
+
 //-----------------------------------------------------------------------------
 // constructor
 
-    public Player (String name) {
-        this.playerName = name;
-        this.playerCard = new Card();
-    }
-
+    
     public Player (String name , Card card) {
         this.playerName = name;
         this.playerCard = card;

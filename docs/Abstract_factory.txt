@@ -10,7 +10,7 @@ class Player
 class Card
 + Card(int row_size , int column_size);
 + Card(std::string array[][]);
-+ bool bingo();
++ bool is_win();
 + void update(int);
 
 - std::string array[][];

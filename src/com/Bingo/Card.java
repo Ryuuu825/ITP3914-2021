@@ -1,3 +1,10 @@
+/*
+ *  This card class can be either shared same instance by few ppl
+ *  or copy constructor is provide to copy value but different instance
+ * 
+ *
+ */
+
 package com.Bingo;
 
 public class Card {
@@ -18,13 +25,12 @@ public class Card {
         }
     }
     
-    public boolean bingo() {
+    public boolean haveBingo() {
         return checkRow();
     }
 
 //-----------------------------------------------------------------------------
 
-    public Card () {} ;
 
     public Card (final String[][] arr) {
         // prevent other instance point to same array
@@ -72,9 +78,22 @@ public class Card {
         return new int[] {};
     }
 
+    private boolean isCross (final String target) {
+        return  ( target.compareToIgnoreCase(CROSS) == 0 ) ;
+    }
 
-    // check is it able to bingo
+//-----------------------------------------------------------------------------
+
+    /*
+     * check does any one of the row have "XX" arranged on their card in same row
+     * which mean that all element in that row are "XX"
+     * 
+     * Implement:
+     *      iterate each row and check condition above.
+     *      goto next iteration if the element isn't "XX"
+     */
     private boolean checkRow() {
+        
         String current;
         NEXTROW : for (int row = 0 ; row < this.cardArray.length ; ++row) {
 
@@ -82,7 +101,7 @@ public class Card {
                 current = this.cardArray[row][column];
 
                 // goto next row if one element isn't "XX"
-                if (current.compareToIgnoreCase(CROSS) != 0) {
+                if (! isCross(current)) {
                     continue NEXTROW;
                 }
             }
@@ -93,12 +112,31 @@ public class Card {
         return false;
     }
 
+    /*
+     * check does any one of the row have "XX" arranged on their card in same column
+     * which mean that all element in that column are "XX"
+     */
+    private void checkColumn() {
+        String current;
+
+        int count = 0;
+        int[] columnToCheck = {};
+        
+        for (int column = 0 ; column < this.cardArray[0].length ; ++column) {
+            if ( isCross(this.cardArray[0][column]) )  {
+                columnToCheck[count++] = column;
+            }
+        }
+    }
+
     private boolean isEmpty(final int[] targetArr) {
         return ( targetArr.length == 0 );
     }
    
 //-----------------------------------------------------------------------------
     private String[][] copyArr(final String[][] arr) {
+
+        // copy the Array by value
 
         final int rowLen = arr.length;
         String[][] temp = new String[rowLen][]; // 2D arr
