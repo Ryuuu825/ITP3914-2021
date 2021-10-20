@@ -10,7 +10,7 @@ OUTPUT_PATH = "./build"
 
 TARGET = "com.Bingo.Main"
 
-excute:
+excute: class
 	java -cp $(OUTPUT_PATH) $(TARGET)
 
 class: 

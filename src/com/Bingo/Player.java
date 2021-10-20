@@ -12,9 +12,6 @@ public class Player {
         return playerName;
     }
 
-    public void update (int target)  {
-        this.playerCard.update(target);
-    }
 //-----------------------------------------------------------------------------
 // constructor
 
