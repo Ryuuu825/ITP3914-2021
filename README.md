@@ -24,7 +24,7 @@ make excute
 
 ### else
 ``` 
-java -cp "./build" com.Bingo.Main
+java -cp "./build" com.Main
 ```
 
 ***
@@ -37,7 +37,7 @@ make class
 ```
 ### else
 ```
-javac -d "./build" src/com/Bingo/*.java 
+javac -d "./build" src/com/Main.java src/com/Bingo/*.java 
 ```
 
 ***
@@ -54,4 +54,10 @@ The porgram will display two players' card on the screen. To meet the requirment
 A player finds the selected numbers are arranged on their card in same row / column / diagonal . 
 
 <img src="./assets/win_example.png" style="width:200px;"/>
+
+## TO-DO_LIST
+- [] refactor the code
+    -> (public method first)
+
+
 

@@ -9,11 +9,11 @@ package com.Bingo;
 
 public class Card {
 //-----------------------------------------------------------------------------
-    final public String[][] getArr() {
+    final protected String[][] getArr() {
         return cardArray;
     }
 
-    public void updateCard (final int target) {
+    protected void  updateCard (final int target) {
         int[] targetIndex = this.searchIndex(target);
 
         if ( ! isEmpty(targetIndex) ) {
@@ -25,7 +25,7 @@ public class Card {
         }
     }
     
-    public boolean haveBingo() {
+    protected boolean haveBingo() {
         return checkRow();
     }
 

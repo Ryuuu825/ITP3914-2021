@@ -1,4 +1,6 @@
-package com.Bingo;
+package com;
+
+import com.Bingo.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +14,7 @@ public class Main {
         Card copyTest = new Card(test);
                
         Player testplayer = new Player("Test player" , test );
-        Game game1 = new Game();
+        Host game1 = new Host();
         game1.registerPlayer(testplayer);
         game1.registerPlayer(new Player("Test player" , test ));
 
@@ -20,12 +22,7 @@ public class Main {
         game1.update(3);
         game1.update(2);
 
-        for (String[] x : test.getArr()) {
-            for (String y : x) {
-                 System.out.print(y+"\t");
-            }
-            System.out.println();
-        }
+        
         
         System.out.println(testplayer.bingo());
 

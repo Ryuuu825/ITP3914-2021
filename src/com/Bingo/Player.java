@@ -4,10 +4,6 @@ package com.Bingo;
 public class Player {
 //-----------------------------------------------------------------------------
 
-    public Card getCard() {
-        return this.playerCard;
-    }
-
     @Override public String toString() {
         return playerName;
     }
@@ -33,4 +29,8 @@ public class Player {
 
 //-----------------------------------------------------------------------------
 
+    protected Card getCard() {
+        return this.playerCard;
+    }
+//-----------------------------------------------------------------------------
 }

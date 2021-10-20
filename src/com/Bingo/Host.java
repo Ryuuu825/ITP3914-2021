@@ -1,6 +1,6 @@
 package com.Bingo;
 
-public class Game {
+public class Host {
 
 //-----------------------------------------------------------------------------
 
@@ -30,10 +30,10 @@ public class Game {
 
 //-----------------------------------------------------------------------------
     
-    public Game(Player... players) {
+    public Host(Player... players) {
         this.registerPlayer(players);
     }
-    public Game() {
+    public Host() {
 
     }
 
