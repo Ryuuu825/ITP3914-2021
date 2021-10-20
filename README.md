@@ -16,13 +16,13 @@
 ***
 ## How to run ?
 
-## If you hava GNU's make
+### If you hava GNU's make
 
 ```
 make excute
 ```
 
-## else
+### else
 ``` 
 java -cp "./build" com.Bingo.Main
 ```
@@ -30,12 +30,12 @@ java -cp "./build" com.Bingo.Main
 ***
 
 ## How to compile?
-## If you hava GNU's make
+### If you hava GNU's make
 
 ```
 make class
 ```
-## else
+### else
 ```
 javac -d "./build" src/com/Bingo/*.java 
 ```
