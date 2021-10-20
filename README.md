@@ -20,7 +20,7 @@
 java -cp "bin' Main
 ```
 
-If you hava make
+## If you hava GNU's make
 
 ```
 make excute
