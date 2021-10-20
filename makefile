@@ -1,21 +1,23 @@
 ##.SUFFIXES: .java .class
 FILE = \
-        src/HelloWorld.java
+        src/com/Bingo/Main.java \
+        src/com/Bingo/Player.java \
+        src/com/Bingo/Card.java
 
 
-SOURCE_PATH = "./src/"
-OUTPUT_PATH = "./bin"
 
-EXCUTE_FILE = "HelloWorld"
+OUTPUT_PATH = "./build"
+
+TARGET = "com.Bingo.Main"
 
 excute:
-	java -cp $(OUTPUT_PATH) $(EXCUTE_FILE)
+	java -cp $(OUTPUT_PATH) $(TARGET)
 
-class: src/HelloWorld.java
+class: 
 	javac -d $(OUTPUT_PATH) $(FILE)
 
 clean:
-	rm ./bin/*.class
+	rm -r ./build/*
 
 
 
