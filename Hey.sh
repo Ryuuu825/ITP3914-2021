@@ -43,13 +43,17 @@ printf "Result:\t" >> $TESTFILE
 
 printf "[Compiling...]\n" 
 
-compile=$(javac -d "./build"  src/com/Bingo/Player.java src/com/Bingo/Card.java src/com/Bingo/Host.java src/com/Main.java 2> temp.log)
+# redirect the error raised to the temp.log
+javac -d "./build"  src/com/Bingo/Player.java src/com/Bingo/Card.java src/com/Bingo/Host.java src/com/Main.java 2> temp.log
 
 if [[ $? != 0 ]] 
 then 
+  # terminate the program if last exit code is not zero
+  # which mean error
   printf "[Compiling Fail]\n" >> $TESTFILE
   printf "[Compiling Fail]\n"
 
+  # copy error message to log file
   error_message=$(cat temp.log |  grep 'error')
   printf  "\noutput :\n\t" >> $TESTFILE
   echo $error_message >> $TESTFILE 
@@ -81,5 +85,7 @@ done
 printf "\n"
 
 printf "\nOutput : \n" >> $TESTFILE
+
+# redirect the error raised to the file
 java -cp "./build" "com.Main" 2>> $TESTFILE >> $TESTFILE
 printf "[EXIT CODE : %d] " $? >> $TESTFILE
