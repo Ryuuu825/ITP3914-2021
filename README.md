@@ -16,17 +16,31 @@
 ***
 ## How to run ?
 
-``` 
-java -cp "bin' Main
-```
-
 ## If you hava GNU's make
 
 ```
 make excute
 ```
+
+## else
+``` 
+java -cp "./build" com.Bingo.Main
+```
+
 ***
 
+## How to compile?
+## If you hava GNU's make
+
+```
+make class
+```
+## else
+```
+javac -d "./build" src/com/Bingo/*.java 
+```
+
+***
 
 ## Description 
 A simple Bingo game run on the console. [Example](https://youtu.be/ANwucID0vAo)
