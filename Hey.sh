@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # build date
+# const info for each build
 DATE=$(date)
 JAVA_VERSION=$(java -version 2>&1 | grep 'version' | awk '{printf $3}' )
 
@@ -16,12 +17,12 @@ esac
 
 #----------------------------------------------
 
-# clean up before build
+# clean up the last build before this build
   find ./build -type f -name "*.class" -delete
 
 #----------------------------------------------
 
-# place the output into ./test/default_testcase.txt
+# The target file to place the log function
 TESTFILE="./log/default_testcase.log"
 
 # formatting
@@ -31,7 +32,7 @@ for ((i=0;i<30;i++)) do
 done 
 printf "\n" >> $TESTFILE
 
-# put date and platform and (Result :) as header
+# Header information 
 echo "Date" : $DATE >> $TESTFILE
 printf "Platform : %s \n" $Paltform >> $TESTFILE
 printf "JDK version : %s \n" $JAVA_VERSION >> $TESTFILE
@@ -41,25 +42,28 @@ printf "Result:\t" >> $TESTFILE
 
 printf "[Compiling...]\n" 
 
-# redirect the error raised to the temp.log
+# redirect the error raised by javac to the temp.log
 javac -d "./build"  src/com/Bingo/Player.java src/com/Bingo/Card.java src/com/Bingo/Host.java src/com/Main.java 2> temp.log
 
+# check javac's exit code 
 if [[ $? != 0 ]] 
 then 
-  # terminate the program if last exit code is not zero
-  # which mean error
+  # which mean javac throw a error
   printf "[Compiling Fail]\n" >> $TESTFILE
   printf "[Compiling Fail]\n"
 
   # copy error message to log file
   error_message=$(cat temp.log |  grep 'error')
   printf  "\noutput :\n\t" >> $TESTFILE
-  echo $error_message >> $TESTFILE 
+  printf $error_message >> $TESTFILE 
+
+  # remove the temp file
   rm temp.log
 
-  # clean up 
+  # clean up before terminate the script
   find ./build -type f -name "*.class" -delete
 
+  # put javac's exit code to the log file
   printf "[EXIT CODE : %d] \n" $? >> $TESTFILE 
   exit -1
 
@@ -87,10 +91,14 @@ printf "\n"
 
 printf "\nOutput : \n" >> $TESTFILE
 
-# redirect the error raised to the file
+# redirect the error raised to the file (if have)
+# run the .class run
 java -cp "./build" "com.Main" 2>> $TESTFILE >> $TESTFILE
+
+# place the exit code of this excution
 printf "[EXIT CODE : %d] \n" $? >> $TESTFILE
 
+# prompt user that script terminate
 for ((i=0;i<10;i++)) do
     printf "-" 
 done 
