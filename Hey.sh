@@ -8,23 +8,21 @@ JAVA_VERSION=$(java -version 2>&1 | grep 'version' | awk '{printf $3}' )
 
 # which os that build it
 case "$OSTYPE" in
-  darwin*)  Paltform="OSX" ;; 
-  linux*)   Paltform="LINUX" ;;
-  msys*)    Paltform="WINDOWS" ;;
-  cygwin*)  Paltform="WINDOWS" ;;
+  darwin*)  Paltform="MacOS" ;; 
+  linux*)   Paltform="Linux" ;;
+  msys*)    Paltform="Windows" ;;
+  cygwin*)  Paltform="Windows" ;;
 esac
 
 #----------------------------------------------
 
-  # clean the build before
-if [ -f ./build/com/Main.java ]
-then 
-    rm -r ./build/*
-fi
+# clean up before build
+  find ./build -type f -name "*.class" -delete
+
 #----------------------------------------------
 
 # place the output into ./test/default_testcase.txt
-TESTFILE="./test_log/default_testcase.txt"
+TESTFILE="./log/default_testcase.log"
 
 # formatting
 printf "\n" >> $TESTFILE
@@ -57,9 +55,12 @@ then
   error_message=$(cat temp.log |  grep 'error')
   printf  "\noutput :\n\t" >> $TESTFILE
   echo $error_message >> $TESTFILE 
+  rm temp.log
 
-  #### need to write error message into $TESTFILE
-  printf "[EXIT CODE : -1]" >> $TESTFILE 
+  # clean up 
+  find ./build -type f -name "*.class" -delete
+
+  printf "[EXIT CODE : %d] \n" $? >> $TESTFILE 
   exit -1
 
 else 
@@ -73,7 +74,7 @@ fi
 
 
 
-printf "[ Logging ...] -> %s\n"  $TESTFILE
+printf "[ Logging ...]\n\tAll output directed to -> %s\n"  $TESTFILE
 
 for ((i=0;i<10;i++)) do
     printf "-" 
@@ -88,4 +89,14 @@ printf "\nOutput : \n" >> $TESTFILE
 
 # redirect the error raised to the file
 java -cp "./build" "com.Main" 2>> $TESTFILE >> $TESTFILE
-printf "[EXIT CODE : %d] " $? >> $TESTFILE
+printf "[EXIT CODE : %d] \n" $? >> $TESTFILE
+
+for ((i=0;i<10;i++)) do
+    printf "-" 
+done 
+printf "[Finish]"
+for ((i=0;i<10;i++)) do
+    printf "-" 
+done 
+printf "\n"
+
