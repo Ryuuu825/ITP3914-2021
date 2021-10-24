@@ -16,6 +16,13 @@ public class Player {
 // constructor
 
     
+    public Player (String name , int cardArr[][]) {
+        this.playerName = name;
+        this.playerCard = new Card( Card.toStringArr(cardArr) ) ;
+    }
+
+    // Different player can point to the same Card instance
+    // which mean they shared same card
     public Player (String name , Card card) {
         this.playerName = name;
         this.playerCard = card;

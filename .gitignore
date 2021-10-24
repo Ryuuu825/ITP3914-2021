@@ -3,3 +3,5 @@ build
 
 #ignore Mac speific files
 .DS_Store
+
+./log/*

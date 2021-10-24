@@ -9,6 +9,26 @@ package com.Bingo;
 
 public class Card {
 //-----------------------------------------------------------------------------
+
+    // this method convert the 2D int array to 2D String array
+    public static String[][] toStringArr(int arr[][]) {
+
+        String o_tempArr[][] = new String[arr.length][];
+
+        for (int i = 0 ; i < arr.length ; ++i) {
+            int size = arr[i].length;
+            o_tempArr[i] = new String[size];
+
+            // convert the int value to String and copy into o_tempArr
+            for (int j = 0 ; j < size ; ++j) {
+                o_tempArr[i][j] = Integer.toString(arr[i][j]);
+            }
+        }
+        
+        return o_tempArr;
+    }
+
+//-----------------------------------------------------------------------------
     final protected String[][] getArr() {
         return cardArray;
     }
@@ -27,6 +47,15 @@ public class Card {
     
     protected boolean haveBingo() {
         return checkRow();
+    }
+
+    protected void showCard() {
+        for (String[] x : this.cardArray) {
+            for (String y :x) {
+                System.out.printf("%s\t" , y);
+            }
+            System.out.println();
+        }
     }
 
 //-----------------------------------------------------------------------------
@@ -68,7 +97,7 @@ public class Card {
                 current = this.cardArray[row][column];
 
                 // used Java default lib to do the comparasion
-                // this function return 0 if the exactly the same
+                // check current isn't the {target}
                 if (current.compareToIgnoreCase(tempTarget) == 0) {
                     return new int[] {row,column};
                 }

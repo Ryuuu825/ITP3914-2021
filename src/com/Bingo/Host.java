@@ -2,6 +2,13 @@ package com.Bingo;
 
 public class Host {
 
+    public void showPlayerCard() {
+        for (Player x : playerSet) {
+            System.out.printf("%s's Card\n" , x);
+            x.getCard().showCard();
+            System.out.println();
+        }
+    }
 //-----------------------------------------------------------------------------
 
     public void registerPlayer(Player... players) {
