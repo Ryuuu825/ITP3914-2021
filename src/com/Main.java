@@ -35,7 +35,7 @@ public class Main {
         while (true) {
             input = sc.nextInt();
 
-            if (input == 0) {
+            if (input == 0 || ! gameOne.isVaildNumber(input)) {
                 break;
             }
             gameOne.update(input);

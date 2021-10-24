@@ -9,6 +9,20 @@ public class Host {
             System.out.println();
         }
     }
+
+    public boolean isVaildNumber(int number) {
+        if (number < 0) 
+            return false;
+        
+        for(int x : histroicalInput) {
+            if (x == number) 
+                return false;
+        }
+
+        return true;
+        
+        
+    }
 //-----------------------------------------------------------------------------
 
     public void registerPlayer(Player... players) {
@@ -30,6 +44,8 @@ public class Host {
     }
 
     public void update(int number) {
+        histroicalInput[inputCount++] = number;
+        
         for (Player x : playerSet) {
             x.getCard().updateCard(number);
         }
@@ -39,10 +55,15 @@ public class Host {
     
     public Host(Player... players) {
         this.registerPlayer(players);
-    }
-    public Host() {
+
+        // this must need to change
+        histroicalInput = new int[25];
 
     }
+    public Host() {
+        // this must need to change
+        histroicalInput = new int[25];
+    };
 
 //-----------------------------------------------------------------------------
 
@@ -61,8 +82,13 @@ public class Host {
     
 //-----------------------------------------------------------------------------
 
-    
+    // number of player
     private int playerNo=0;
+    // array of the player in *this game
     private Player[] playerSet;
-    private int histroicalInput;
+
+    // store the histroical input
+    private int[] histroicalInput;
+    // used for input into histroicalInput
+    private int inputCount;
 }
