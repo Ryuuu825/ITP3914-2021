@@ -61,19 +61,40 @@ public class Card {
 //-----------------------------------------------------------------------------
 
 
+// any instances of Card is not allow to point to same array
+
     public Card (final String[][] arr) {
-        // prevent other instance point to same array
         this.cardArray = copyArr(arr);
+        rowSize = cardArray.length;
+
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // may be need to change
+        columnSize = cardArray[0].length;
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
     }
     
     public Card (final Card other) {
-        // prevent other instance point to same array
+        
         this.cardArray = copyArr(other.cardArray);
+        this.rowSize = other.rowSize;
+
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // may be need to change
+        this.columnSize = other.columnSize;
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
     }
     
 //-----------------------------------------------------------------------------
+// member
+
     private String[][] cardArray;
     final private String CROSS = "XX";
+    protected int rowSize;
+    protected int columnSize;
+
+
 
 //-----------------------------------------------------------------------------
 

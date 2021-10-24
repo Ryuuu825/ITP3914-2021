@@ -4,14 +4,16 @@ public class Host {
 
     public void showPlayerCard() {
         for (Player x : playerSet) {
+
             System.out.printf("%s's Card\n" , x);
             x.getCard().showCard();
             System.out.println();
+
         }
     }
 
     public boolean isVaildNumber(int number) {
-        if (number < 0) 
+        if (number < 0 || number > 25) 
             return false;
         
         for(int x : histroicalInput) {
@@ -44,6 +46,8 @@ public class Host {
     }
 
     public void update(int number) {
+
+        // track the input isn't being input
         histroicalInput[inputCount++] = number;
         
         for (Player x : playerSet) {
@@ -57,12 +61,13 @@ public class Host {
         this.registerPlayer(players);
 
         // this must need to change
-        histroicalInput = new int[25];
+        histroicalInput = new int[this.maxInput()];
 
     }
+
     public Host() {
         // this must need to change
-        histroicalInput = new int[25];
+        histroicalInput = new int[this.maxInput()];
     };
 
 //-----------------------------------------------------------------------------
@@ -79,6 +84,24 @@ public class Host {
     }
 //-----------------------------------------------------------------------------
 
+    private final int maxInput() {
+        int maxRow = 0;
+        int maxCoulmn = 0;
+
+
+        for (Player x : playerSet ) {
+            if (x.getCard().rowSize > maxRow ) {
+                maxRow = x.getCard().rowSize;
+            }
+
+            if (x.getCard().columnSize > maxCoulmn ) {
+                maxCoulmn = x.getCard().columnSize;
+            }
+
+        }
+
+        return maxRow * maxCoulmn;
+    }
     
 //-----------------------------------------------------------------------------
 
@@ -89,6 +112,7 @@ public class Host {
 
     // store the histroical input
     private int[] histroicalInput;
+
     // used for input into histroicalInput
     private int inputCount;
 }

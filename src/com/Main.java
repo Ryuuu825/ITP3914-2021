@@ -28,18 +28,32 @@ public class Main {
         com.Bingo.Player playerOne = new com.Bingo.Player("Player 1" , cardOne );
         com.Bingo.Player playerTwo = new com.Bingo.Player("Player 2" , cardTwo );
 
-        com.Bingo.Host gameOne = new com.Bingo.Host();
-        gameOne.registerPlayer(playerOne , playerTwo);
+        com.Bingo.Host gameOne = new com.Bingo.Host(playerOne , playerTwo);
+
+        gameOne.showPlayerCard();
 
         int input;
         while (true) {
+            // prompt user
+            System.out.printf("Game Host call (0 to exit): ");
             input = sc.nextInt();
 
-            if (input == 0 || ! gameOne.isVaildNumber(input)) {
+            if (input == 0) {
+                // exit the program
                 break;
             }
-            gameOne.update(input);
-            gameOne.showPlayerCard();
+
+            if (gameOne.isVaildNumber(input)) {
+                
+                gameOne.update(input);
+                gameOne.showPlayerCard();
+
+            }
+            else  {
+                // receive next vaild input
+                System.out.printf("Game Host call (0 to exit): The number %d is repeated, please call again!\n" , input);
+                continue;
+            }
 
 
         }

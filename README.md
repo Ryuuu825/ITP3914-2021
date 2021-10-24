@@ -58,6 +58,8 @@ A player finds the selected numbers are arranged on their card in same row / col
 ## TO-DO_LIST
 - [] refactor the code
     -> (public method first)
+- [] able to use register player after create instance of Host
+- [] algoritrm about terminate winning
 
 
 
