@@ -43,7 +43,7 @@ javac -d "./build" src/com/Main.java src/com/Bingo/*.java
 ***
 
 ## Description 
-A simple Bingo game run on the console. [Example](https://youtu.be/ANwucID0vAo)
+A simple Bingo game run on the console. [Example](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 
 The porgram will display two players' card on the screen. To meet the requirment of the assignment , the arrangememt of 25 numbers on the cards are ***fixed*** by default. Also , a game host need to input a number to program. According to the corresponding number on players' cards, the game will mark a "XX" to replace the number if the number are the same. The program will terminate when player / players win. 
@@ -58,6 +58,8 @@ A player finds the selected numbers are arranged on their card in same row / col
 ## TO-DO_LIST
 - [] refactor the code
     -> (public method first)
+- [] keep refactor 
+- [] array need to be square matrix
 - [] able to use register player after create instance of Host
 - [] algoritrm about terminate winning
 

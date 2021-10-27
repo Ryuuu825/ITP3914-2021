@@ -1,6 +1,8 @@
 package com.Bingo;
 
 public class Host {
+//-----------------------------------------------------------------------------
+// after set up the Game
 
     public void showPlayerCard() {
         for (Player x : playerSet) {
@@ -13,20 +15,35 @@ public class Host {
     }
 
     public boolean isVaildNumber(int number) {
-        if (number < 0 || number > 25) 
+        // check the input is or not in the range
+        if (number < minValue || number > maxValue) 
             return false;
         
+        // if the input appear in histroicalInput array
+        // it is not a vaild input
         for(int x : histroicalInput) {
             if (x == number) 
                 return false;
         }
 
-        return true;
-        
-        
+        return true;  
     }
-//-----------------------------------------------------------------------------
 
+    public void update(int number) {
+
+        // track the input isn't being input
+        histroicalInput[inputCount++] = number;
+        
+        // foreach player in this game
+        // call the update method
+        // to replace number with "XX"
+        for (Player x : playerSet) {
+            x.getCard().updateCard(number);
+        }
+    }
+
+//-----------------------------------------------------------------------------
+// method to set up the game
     public void registerPlayer(Player... players) {
         
         int tempSize = players.length + playerNo;
@@ -45,28 +62,20 @@ public class Host {
         playerNo = tempSize;
     }
 
-    public void update(int number) {
-
-        // track the input isn't being input
-        histroicalInput[inputCount++] = number;
-        
-        for (Player x : playerSet) {
-            x.getCard().updateCard(number);
-        }
-    }
-
 //-----------------------------------------------------------------------------
     
     public Host(Player... players) {
         this.registerPlayer(players);
 
-        // this must need to change
+        // create a array to track the input
+        // maxInput return max possible number of integer can be inputted
         histroicalInput = new int[this.maxInput()];
 
     }
 
     public Host() {
-        // this must need to change
+        // create a array to track the input
+        // maxInput return maximum possible number of integer can be inputted
         histroicalInput = new int[this.maxInput()];
     };
 
@@ -84,23 +93,21 @@ public class Host {
     }
 //-----------------------------------------------------------------------------
 
-    private final int maxInput() {
-        int maxRow = 0;
-        int maxCoulmn = 0;
-
+    public final int maxInput() {
+        // pretend all the player array is square matrix
+        
+        int max = 0;
 
         for (Player x : playerSet ) {
-            if (x.getCard().rowSize > maxRow ) {
-                maxRow = x.getCard().rowSize;
-            }
 
-            if (x.getCard().columnSize > maxCoulmn ) {
-                maxCoulmn = x.getCard().columnSize;
-            }
+            int current = x.getCard().rowSize * x.getCard().columnSize;
 
+            if ( current > max) {
+                max = current;
+            }
         }
 
-        return maxRow * maxCoulmn;
+        return max;
     }
     
 //-----------------------------------------------------------------------------
@@ -111,8 +118,13 @@ public class Host {
     private Player[] playerSet;
 
     // store the histroical input
+    // static array
     private int[] histroicalInput;
 
     // used for input into histroicalInput
     private int inputCount;
+
+    // the range of number on the card
+    private int minValue;
+    private int maxValue;
 }
