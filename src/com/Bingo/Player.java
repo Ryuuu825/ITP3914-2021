@@ -4,7 +4,8 @@ package com.Bingo;
 public class Player {
 //-----------------------------------------------------------------------------
 
-    @Override public String toString() {
+    @Override 
+    public String toString() {
         return playerName;
     }
 
@@ -18,7 +19,7 @@ public class Player {
     
     public Player (String name , int cardArr[][]) {
         this.playerName = name;
-        this.playerCard = new Card( Card.toStringArr(cardArr) ) ;
+        this.playerCard = new Card(cardArr) ;
     }
 
     // Different player can point to the same Card instance

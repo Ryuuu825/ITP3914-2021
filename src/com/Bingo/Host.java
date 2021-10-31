@@ -4,7 +4,7 @@ public class Host {
 //-----------------------------------------------------------------------------
 // after set up the Game
 
-    public void showPlayerCard() {
+    public void showPlayersCard() {
         for (Player x : playerSet) {
 
             System.out.printf("%s's Card\n" , x);
@@ -70,6 +70,9 @@ public class Host {
         // create a array to track the input
         // maxInput return max possible number of integer can be inputted
         histroicalInput = new int[this.maxInput()];
+        System.out.println(histroicalInput.length);
+
+        maxValue = maxInput();
 
     }
 
@@ -77,6 +80,8 @@ public class Host {
         // create a array to track the input
         // maxInput return maximum possible number of integer can be inputted
         histroicalInput = new int[this.maxInput()];
+        maxValue = maxInput();
+
     };
 
 //-----------------------------------------------------------------------------
@@ -95,19 +100,16 @@ public class Host {
 
     public final int maxInput() {
         // pretend all the player array is square matrix
-        
         int max = 0;
 
         for (Player x : playerSet ) {
 
-            int current = x.getCard().rowSize * x.getCard().columnSize;
-
-            if ( current > max) {
-                max = current;
+            if (x.getCard().SIZE > max ) {
+                max = x.getCard().SIZE;
             }
         }
 
-        return max;
+        return max * max ;
     }
     
 //-----------------------------------------------------------------------------
@@ -125,6 +127,6 @@ public class Host {
     private int inputCount;
 
     // the range of number on the card
-    private int minValue;
-    private int maxValue;
+    private final int minValue = 0;
+    private final int maxValue;
 }
