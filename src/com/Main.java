@@ -25,36 +25,44 @@ public class Main {
             {22,4,9,1,2}
         };
         
-        Player playerOne = new Player("Player 1" , cardOne );
-        Player playerTwo = new Player("Player 2" , cardTwo );
+        // set up a game which have two player
+        Host gameOne = new Host( 
+                new Player("Player 1" , cardOne ) , 
+                new Player("Player 2" , cardTwo ) 
+            );
 
-        Host gameOne = new Host(playerOne , playerTwo);
-
-        gameOne.showPlayersCard();
-
+        
         int input;
+        
+
+
+
+        // main loop 
         while (true) {
+
+            gameOne.showPlayersCard();
+
             // prompt user
             System.out.printf("Game Host call (0 to exit): ");
             input = sc.nextInt();
 
-            if (input == 0) {
-                // exit the program
-                break;
-            }
 
-            if (gameOne.isVaildNumber(input)) {
-                
+            // check the input 
+            if (input == 0) { break; };
+
+            if (gameOne.isVaildNumber(input))
+            {
                 gameOne.update(input);
-                gameOne.showPlayersCard();
-
             }
-            else  {
+            else  
+            {
                 // receive next vaild input
                 System.out.printf("Game Host call (0 to exit): The number %d is repeated, please call again!\n" , input);
                 continue;
             }
 
+
+            // check any bingo
 
         }
 

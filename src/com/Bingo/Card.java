@@ -8,13 +8,17 @@
  *                      ->  show the card 
  *                      ->  update the card
  *                  
- *                  The Player class can shard the saåme instance of <Card> class.
+ *                  The Player class can shard the same instance of <Card> class.
+ * 
+ *  Last modify :   2-11-2021 (17:32)
  *
  */
 
 package com.Bingo;
 
 public class Card {
+
+
 //------------------------ constructor ------------------------------------
 
     // any instances of Card is not allow to point to same array

@@ -1,8 +1,42 @@
+/*
+ *  Author      :       Lee Kai Pui (210 339 487) 
+ *  
+ *  Describle   :       This class is for host a game of bingo .
+ *                      Also it is an interface to call the mothod 
+ *                      from player's card class.
+ *                   
+ *  Last modify :       2-11-2021 (17:50) HKT
+ * 
+ */
+
+
 package com.Bingo;
 
 public class Host {
+//----------------------- [constructor] -------------------------------------
+    
+    public Host(Player... players) {
+
+        this.registerPlayer(players);
+
+        // create an array to track the input inputted
+        // maxInput return max possible number of integer can be inputted
+        maxValue = maxInput();
+        histroicalInput = new int[maxValue];
+
+
+    }
+
+    public Host() {
+
+        // create a array to track the input
+        // maxInput return maximum possible number of integer can be inputted
+        histroicalInput = new int[this.maxInput()];
+        maxValue = maxInput();
+
+    };
 //-----------------------------------------------------------------------------
-// after set up the Game
+
 
     public void showPlayersCard() {
         for (Player x : playerSet) {
@@ -46,43 +80,22 @@ public class Host {
 // method to set up the game
     public void registerPlayer(Player... players) {
         
-        int tempSize = players.length + playerNo;
-        Player[] temp = new Player[tempSize];
+        int newSize = players.length + playerNo;
+        Player[] temp = new Player[newSize];
 
         // clone element into temp arr
         for (int i = 0 ; i < playerNo ; ++i) {
             temp[i] = playerSet[i];
         }
 
-        for (int i = playerNo ; i < tempSize ; ++i) {
+        for (int i = playerNo ; i < newSize ; ++i) {
             temp[i] = players[i - playerNo];
         }
         
         playerSet = temp;
-        playerNo = tempSize;
+        playerNo = newSize;
     }
 
-//-----------------------------------------------------------------------------
-    
-    public Host(Player... players) {
-        this.registerPlayer(players);
-
-        // create a array to track the input
-        // maxInput return max possible number of integer can be inputted
-        histroicalInput = new int[this.maxInput()];
-        System.out.println(histroicalInput.length);
-
-        maxValue = maxInput();
-
-    }
-
-    public Host() {
-        // create a array to track the input
-        // maxInput return maximum possible number of integer can be inputted
-        histroicalInput = new int[this.maxInput()];
-        maxValue = maxInput();
-
-    };
 
 //-----------------------------------------------------------------------------
 
