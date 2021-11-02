@@ -34,7 +34,7 @@ public class Host {
         histroicalInput = new int[this.maxInput()];
         maxValue = maxInput();
 
-    };
+    }
 //-----------------------------------------------------------------------------
 
 
@@ -134,7 +134,7 @@ public class Host {
 
     // store the histroical input
     // static array
-    private int[] histroicalInput;
+    private final int[] histroicalInput;
 
     // used for input into histroicalInput
     private int inputCount;

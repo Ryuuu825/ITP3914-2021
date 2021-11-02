@@ -95,9 +95,9 @@ protected void showCard() {
 //------------------------------- Static Function -------------------------------------
 
     // this method convert the 2D int array to a new 2D String array
-    public static String[][] toStringArr(final int arr[][]) {
+    public static String[][] toStringArr(final int[][] arr) {
 
-        String o_tempArr[][] = new String[arr.length][];
+        String[][] o_tempArr = new String[arr.length][];
 
         for (int i = 0 ; i < arr.length ; ++i) {
             int size = arr[i].length;
@@ -117,7 +117,7 @@ protected void showCard() {
 //------------------------------ Member variable --------------------------------------
 
     // the card
-    private String[][] cardArray;
+    private final String[][] cardArray;
 
     // size of the card 
     //      -> e.g. 5 X 5
@@ -223,7 +223,7 @@ protected void showCard() {
 
             for (int column = 0 ; column < columnLen ; ++column) {
                 // copy by value not references
-                temp[row][column] = new String(arr[row][column]);
+                temp[row][column] = arr[row][column];
             }
         }
 

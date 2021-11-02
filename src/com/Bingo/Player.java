@@ -16,7 +16,7 @@ public class Player {
 //---------------------------- [ Constructor ] --------------------------------
 
 // automactiy create a Card instance for player    
-public Player (String name , int cardArr[][]) {
+public Player (String name , int[][] cardArr) {
     this.playerName = name;
     this.playerCard = new Card(cardArr) ;
 }
@@ -28,7 +28,7 @@ public Player (String name , Card card) {
 }
 
 // hide the constructor
-private Player(){};
+private Player(){}
 
 //-----------------------------------------------------------------------------
 

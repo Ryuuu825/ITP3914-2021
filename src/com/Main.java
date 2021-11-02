@@ -1,3 +1,15 @@
+/*
+ *  Author      :       Lee Kai Pui (210339487)
+ * 
+ *  File        :       Main.java
+ * 
+ *  Desrcibe    :       A simple Bingo console game.
+ *                      This file is the main game loop.
+ *  
+ *  Last modify :       2-11-2021 (19:31) HKT
+ * 
+ */
+
 package com;
 
 import com.Bingo.*;
@@ -8,8 +20,8 @@ public class Main {
     public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
 
-        // set up array need by Player
-        final int cardOne[][] = {
+        // set up array need by player one
+        final int[][] cardOne = {
             {24,2,8,1,25},
             {12,16,7,17,15},
             {5,6,20,19,13},
@@ -17,7 +29,8 @@ public class Main {
             {10,18,11,21,9}
         };
 
-        final int cardTwo[][] = {
+        // set up array need by player two
+        final int[][] cardTwo = {
             {24,21,17,15,6},
             {10,3,8,18,20},
             {14,7,16,12,5},
@@ -32,14 +45,15 @@ public class Main {
             );
 
         
+        // for receive input
         int input;
         
+//-----------------------------------------------------------------------------
 
-
-
-        // main loop 
+        // main game loop 
         while (true) {
 
+            // show the array at the begin of the loop
             gameOne.showPlayersCard();
 
             // prompt user
@@ -47,11 +61,13 @@ public class Main {
             input = sc.nextInt();
 
 
-            // check the input 
-            if (input == 0) { break; };
+            // exit the program if input is 0
+            if (input == 0) { break; }
 
-            if (gameOne.isVaildNumber(input))
+            // check if the input is inputted before
+            if ( gameOne.isVaildNumber(input) )
             {
+                // update player's card
                 gameOne.update(input);
             }
             else  
