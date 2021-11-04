@@ -28,13 +28,13 @@ public class Host {
     }
 
     public Host() {
-
+           
         // create a array to track the input
         // maxInput return maximum possible number of integer can be inputted
         histroicalInput = new int[this.maxInput()];
         maxValue = maxInput();
 
-    }
+    };
 //-----------------------------------------------------------------------------
 
 
@@ -134,7 +134,7 @@ public class Host {
 
     // store the histroical input
     // static array
-    private final int[] histroicalInput;
+    private int[] histroicalInput;
 
     // used for input into histroicalInput
     private int inputCount;
