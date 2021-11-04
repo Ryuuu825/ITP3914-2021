@@ -12,7 +12,7 @@
  * 
  *  
  * 
- *  Last modify :   2-11-2021 (17:32) HKT
+ *  Create Date :   19-10-2021
  *
  */
 
@@ -26,102 +26,32 @@ public class Card {
     // any instances of Card is not allow to point to same array
     // the array should be square matrix
 
-    public Card (final int[][] arr) {
+    public Card (final int[][] arr) 
+    {
+        // checking if the array past in isn't a square matrix
+        checkSquareMatrix(arr);
 
         // deep copy
         this.cardArray = copyArr(arr);
 
-        // checking if the array past in isn't a square matrix
-        if (this.cardArray.length != this.cardArray[0].length ) {
-            System.err.printf("Not a Square matrix");
-        }
-
         this.SIZE = this.cardArray.length;
-
     }
 
     // deep copy
-    public Card (final Card other) {
-        
+    public Card (final Card other)
+    {
         this.cardArray = copyArr(other.cardArray);
-
-        // error checking
-        if (this.cardArray.length != this.cardArray[0].length ) {
-            System.err.printf("Not a Square matrix");
-        }
 
         this.SIZE = this.cardArray.length;
 
     }
 
-//--------------------------- Main Method ------------------------------
-
-// terminate if this instance is bingo
-protected boolean haveBingo() {
-    return checkRow();
-}
-
-
-// get the const references of the 2D array
-// not allow to change the value 
-protected final int[][] getArr() {
-    return this.cardArray;
-}
-
-
-// update the number input by host in the 2D array 
-protected void updateCard (final int target) {
-
-    // serach where to update the value
-    // return empty array if not found
-    int[] targetIndex = this.searchIndex(target);
-
-    if ( ! isEmpty(targetIndex) ) {
-        int row = targetIndex[0];
-        int column = targetIndex[1];
-
-        this.cardArray[row][column] = CROSS;
-    }
-}
-
-
-// print all element in the array
-// print "XX" if the element is occupied
-protected void showCard() {
-    for (final int[] row : this.cardArray)
-    {
-        for (final int current : row) 
-        { 
-            if ( current == CROSS ) 
-                System.out.printf("XX\t");
-            else
-                System.out.printf("%d\t" ,  current);
-        }
-        System.out.println();
-    }
-}
-
-
-//------------------------------ Member variable --------------------------------------
-
-    // the card
-    private int[][] cardArray;
-
-    // size of the card 
-    //      -> e.g. 5 X 5
-    protected final int SIZE;
-
-    // pre-define word
-    // -1 is used for exit the game that never pass into updateCard() 
-    // so -1 is most suitable 
-    final private int CROSS = -1;
-
-
-//------------------------ Main Algoritrms --------------------------------------
+//------------------------ [ Main Algoritrms ] --------------------------------------
+// Here is something you may want to take a look
 
 
     /*
-     * check does any one of the row have CROSS arranged on their card in same row
+     * check does any one of the row have CROSS arranged on this instance in same row
      * which mean that all element in that row are CORSS
      * 
      * Implement:
@@ -134,9 +64,9 @@ protected void showCard() {
         int current;
 
         NEXTROW : 
-            for (int row = 0 ; row < this.cardArray.length ; ++row) {
+            for (int row = 0 ; row < this.SIZE ; ++row) {
 
-                for (int column = 0 ; column < this.cardArray[row].length ; ++column) {
+                for (int column = 0 ; column < this.SIZE ; ++column) {
 
                     current = this.cardArray[row][column];
 
@@ -155,10 +85,98 @@ protected void showCard() {
     /*
      * check does any one of the row have "XX" arranged on their card in same column
      * which mean that all element in that column are "XX"
+     * 
+     *  Implement:
+     *      simialr with acheckRow
+     *      iterate each column and check condition above 
+     *      Goto next iteratation earily if one element in that column isn't CROSS 
      */
     private final boolean checkColumn() {
+        NEXTCOL:
+            for (int column = 0  ; column < this.SIZE ; ++column ) {
+                for (int row = 0 ; row < this.SIZE ; ++row ) {
+                    if ( this.cardArray[row][column] != CROSS ) 
+                        continue NEXTCOL;
+                }
+                // that mean all element is that column are CROSS
+                // if the program able to reach here
+                return true;
+            }
+        // default
         return false;
     }
+
+
+//--------------------------- [ Main Method ] ------------------------------
+
+    // terminate if this instance is bingo or not
+    protected boolean haveBingo() 
+    {
+        return checkRow() || checkColumn();
+    }
+
+
+    // get the const references of the 2D array
+    // not allow to change the value 
+    protected final int[][] getArr() 
+    {
+        return this.cardArray;
+    }
+
+
+    // update the number in 2D array which the number is inputted by host
+    protected void updateCard (final int target) 
+    {
+
+        // serach where to update the value
+        // return empty array if not found
+        int[] targetIndex = this.searchIndex(target);
+
+        if ( isEmpty(targetIndex) ) { return; };
+       
+
+        int row = targetIndex[0];
+        int column = targetIndex[1];
+        this.cardArray[row][column] = CROSS;
+    }
+
+
+    // print all element in the array
+    // print "XX" if the element is occupied (which is -1)
+    protected void showCard() 
+    {
+        for (final int[] row : this.cardArray)
+        {
+            for (final int current : row) 
+            { 
+                if ( current == CROSS ) 
+                    System.out.printf("XX\t");
+                else
+                    System.out.printf("%d\t" ,  current);
+            }
+            // go to nextline of each row
+            System.out.println();
+        }
+    }
+
+
+//------------------------------ [ Member variable ] --------------------------------------
+
+    // the card
+    private int[][] cardArray;
+
+    // size of the card 
+    //      -> e.g. 5 X 5
+    // since it must be a square matrix
+    // only need to store one value
+    protected final int SIZE;
+
+    // pre-define word
+    // -1 is used for exit the game that never pass into updateCard() 
+    // so -1 is most suitable 
+    final private int CROSS = -1;
+
+
 
     
    
@@ -216,6 +234,19 @@ protected void showCard() {
         }
 
         return temp;
+    }
+
+    // ensure the array have same row size and column size
+    private boolean checkSquareMatrix ( final int arr[][] ) 
+    {
+        final int rowSize = arr.length;
+
+        for (int i = 0 ; i < rowSize ; ++i ) {
+            if (arr[i].length != rowSize )
+                // use print error to replace throw exception
+                System.err.println("Not a square matrix");
+        }
+        return true;
     }
 
     private boolean isEmpty(final int[] targetArr) {

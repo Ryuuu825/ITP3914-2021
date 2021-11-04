@@ -40,7 +40,12 @@ private Player(){}
 
     // a public method to terminate if the player bingo
     public final boolean bingo() {
-        return this.playerCard.haveBingo();
+        if (this.playerCard.haveBingo() ) {
+            isBingo = true;
+            return true;
+        }
+        // default value
+        return false;
     }
 
 
@@ -56,6 +61,7 @@ private Player(){}
 
     private Card playerCard;
     private String playerName;
+    protected boolean isBingo;
 
 //-----------------------------------------------------------------------------
 }

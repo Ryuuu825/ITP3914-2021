@@ -39,28 +39,31 @@ public class Host {
 
 
     public void showPlayersCard() {
-        for (Player x : playerSet) {
+        for (Player player : playerSet) {
 
-            System.out.printf("%s's Card\n" , x);
-            x.getCard().showCard();
+            System.out.printf("%s's Card\n" , player);
+            player.getCard().showCard();
             System.out.println();
 
         }
     }
 
-    public boolean isVaildNumber(int number) {
-        // check the input is or not in the range
-        if (number < minValue || number > maxValue) 
-            return false;
-        
+    // check if the input is in the range
+    public boolean isInRange(int number ) {
+        return (number > minValue && number < maxValue);  
+    }
+
+    // check if the input isn't repeat
+    public boolean isRepeatedInput(int number) {
+     
         // if the input appear in histroicalInput array
         // it is not a vaild input
         for(int x : histroicalInput) {
             if (x == number) 
-                return false;
+                return true;
         }
 
-        return true;  
+        return false;  
     }
 
     public void update(int number) {
@@ -76,6 +79,24 @@ public class Host {
         }
     }
 
+    // terminate does any one of the player is bingo 
+    // if yes then prompt user and set the parameter to break out the game loopo
+    public void Bingo() {
+        for (Player player : playerSet ) {
+            if (player.bingo()) {
+                System.out.printf ("%s Bingo" , player);
+                this.status = true;
+
+            }
+
+        }
+    }
+
+
+    
+    public final boolean endGame () {
+       return this.status;
+    }
 //-----------------------------------------------------------------------------
 // method to set up the game
     public void registerPlayer(Player... players) {
@@ -142,4 +163,7 @@ public class Host {
     // the range of number on the card
     private final int minValue = 0;
     private final int maxValue;
+
+    // track any player win the game
+    private boolean status = false;
 }

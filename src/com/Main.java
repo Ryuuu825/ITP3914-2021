@@ -50,11 +50,13 @@ public class Main {
         
 //-----------------------------------------------------------------------------
 
-        // main game loop 
-        while (true) {
+        gameOne.showPlayersCard();
 
-            // show the array at the begin of the loop
-            gameOne.showPlayersCard();
+        // main game loop 
+        while ( ! gameOne.endGame() ) {
+
+            
+            
 
             // prompt user
             System.out.printf("Game Host call (0 to exit): ");
@@ -64,23 +66,39 @@ public class Main {
             // exit the program if input is 0
             if (input == 0) { break; }
 
-            // check if the input is inputted before
-            if ( gameOne.isVaildNumber(input) )
+            // check is the input in the range
+            if ( ! gameOne.isInRange(input)) 
             {
-                // update player's card
-                gameOne.update(input);
-            }
-            else  
-            {
-                // receive next vaild input
-                System.out.printf("Game Host call (0 to exit): The number %d is repeated, please call again!\n" , input);
+                System.out.println("The number must be between 1 to 25, please call again! ");
                 continue;
             }
+            // check if the input is inputted before
+            else if (gameOne.isRepeatedInput(input))
+            {
+                System.out.printf("The number %d is repeated, please call again!\n" , input);
+                continue;
+            }
+            else
+            {
+                
+                // update player's card
+                gameOne.update(input);
+                
+                // show the array at the end of the loop
+                gameOne.showPlayersCard();
 
 
-            // check any bingo
+                // check does anyone bingo
+                // won't show anything if no one bingo
+                gameOne.Bingo();
+
+            }          
+
 
         }
+        
+        // close the scanenr 
+        sc.close();
 
         
         
