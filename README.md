@@ -74,5 +74,5 @@ javac -d "./build" src/com/Main.java src/com/Bingo/*.java
 - [] able to use register player after create instance of Host
 - [] algoritrm about terminate winning
 
-
-
+## Code quality
+![adf](./photo/code_analyze.png)
