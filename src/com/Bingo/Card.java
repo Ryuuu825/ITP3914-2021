@@ -10,7 +10,9 @@
  *                  
  *                  The Player class can shard the same instance of <Card> class.
  * 
- *  Last modify :   2-11-2021 (17:32)
+ *  
+ * 
+ *  Last modify :   2-11-2021 (17:32) HKT
  *
  */
 
@@ -19,14 +21,17 @@ package com.Bingo;
 public class Card {
 
 
-//------------------------ constructor ------------------------------------
+//------------------------ [ Constructor ] ------------------------------------
 
     // any instances of Card is not allow to point to same array
     // the array should be square matrix
 
     public Card (final int[][] arr) {
-        this.cardArray = Card.toStringArr(arr);
 
+        // deep copy
+        this.cardArray = copyArr(arr);
+
+        // checking if the array past in isn't a square matrix
         if (this.cardArray.length != this.cardArray[0].length ) {
             System.err.printf("Not a Square matrix");
         }
@@ -35,10 +40,12 @@ public class Card {
 
     }
 
+    // deep copy
     public Card (final Card other) {
         
         this.cardArray = copyArr(other.cardArray);
 
+        // error checking
         if (this.cardArray.length != this.cardArray[0].length ) {
             System.err.printf("Not a Square matrix");
         }
@@ -57,7 +64,7 @@ protected boolean haveBingo() {
 
 // get the const references of the 2D array
 // not allow to change the value 
-protected final String[][] getArr() {
+protected final int[][] getArr() {
     return this.cardArray;
 }
 
@@ -79,69 +86,52 @@ protected void updateCard (final int target) {
 
 
 // print all element in the array
+// print "XX" if the element is occupied
 protected void showCard() {
-    for (final String[] x : this.cardArray)
+    for (final int[] row : this.cardArray)
     {
-        for (final String y :x) 
-        {
-            System.out.printf("%s\t" , y);
+        for (final int current : row) 
+        { 
+            if ( current == CROSS ) 
+                System.out.printf("XX\t");
+            else
+                System.out.printf("%d\t" ,  current);
         }
         System.out.println();
     }
 }
 
 
-
-//------------------------------- Static Function -------------------------------------
-
-    // this method convert the 2D int array to a new 2D String array
-    public static String[][] toStringArr(final int[][] arr) {
-
-        String[][] o_tempArr = new String[arr.length][];
-
-        for (int i = 0 ; i < arr.length ; ++i) {
-            int size = arr[i].length;
-            o_tempArr[i] = new String[size];
-
-            // convert the int value to String and copy into o_tempArr
-            for (int j = 0 ; j < size ; ++j) {
-                // copy the value only 
-                o_tempArr[i][j] = Integer.toString(arr[i][j]);
-            }
-        }
-        
-        return o_tempArr;
-    }
-
-
 //------------------------------ Member variable --------------------------------------
 
     // the card
-    private final String[][] cardArray;
+    private int[][] cardArray;
 
     // size of the card 
     //      -> e.g. 5 X 5
     protected final int SIZE;
 
     // pre-define word
-    final private String CROSS = "XX";
+    // -1 is used for exit the game that never pass into updateCard() 
+    // so -1 is most suitable 
+    final private int CROSS = -1;
 
 
 //------------------------ Main Algoritrms --------------------------------------
 
 
     /*
-     * check does any one of the row have "XX" arranged on their card in same row
-     * which mean that all element in that row are "XX"
+     * check does any one of the row have CROSS arranged on their card in same row
+     * which mean that all element in that row are CORSS
      * 
      * Implement:
      *      iterate each row and check condition above.
-     *      goto next iteration if the element isn't "XX"
+     *      goto next iteration early if one element in that row isn't CROSS
      */
     private final boolean checkRow() {
         
         // cursor
-        String current;
+        int current;
 
         NEXTROW : 
             for (int row = 0 ; row < this.cardArray.length ; ++row) {
@@ -155,7 +145,7 @@ protected void showCard() {
                         continue NEXTROW;
                     }
                 }
-                // all element in that row is "XX" when porgram reach here
+                // all element in that row is "XX" when the porgram able to reach here
                 return true;
             }
         // default
@@ -177,17 +167,16 @@ protected void showCard() {
     /* 
      * this method search the element in the array 
      * return the index if element exist
-     * else return empty int[]
+     * else return a empty int[]
      * please remind that only return first match value
      */
     private final int[] searchIndex (final int target)  {
-        // this.cardArray is a String[][]
-        // therefore need to convert the target into String first 
-         final String tempTarget = Integer.toString(target);
  
          // cursor
-         String current;
- 
+         int current;
+        
+         // using O(n^2)
+
          // iterate each element and compare are they same
          for (int row = 0 ; row < this.cardArray.length ; ++row) {
  
@@ -195,9 +184,7 @@ protected void showCard() {
                  
                  current = this.cardArray[row][column];
  
-                 // used Java default lib to do the comparasion
-                 // check current isn't the {target}
-                 if (current.compareToIgnoreCase(tempTarget) == 0) {
+                 if ( current == target ) {
                      return new int[] {row,column};
                  }
              }
@@ -210,20 +197,20 @@ protected void showCard() {
 
     // Copy the value of the parameter (2D array) to a new 2D array
     // and return the new array
-    private String[][] copyArr(final String[][] arr) {
+    private int[][] copyArr(final int[][] arr) {
 
-        // copy the Array by value
+        // copy the value in the array to a new array
         final int rowLen = arr.length;
-        String[][] temp = new String[rowLen][]; // 2D arr
+        int[][] temp = new int[rowLen][]; // 2D arr
 
         for (int row = 0 ; row < rowLen ; ++row) {
 
             final int columnLen = arr[row].length;
-            temp[row] = new String[columnLen]; // 1D arr
+            temp[row] = new int[columnLen]; // 1D arr
 
             for (int column = 0 ; column < columnLen ; ++column) {
                 // copy by value not references
-                temp[row][column] = arr[row][column];
+                temp[row][column] = Integer.valueOf( arr[row] [column] );
             }
         }
 
@@ -234,7 +221,7 @@ protected void showCard() {
         return ( targetArr.length == 0 );
     }
 
-    private boolean isCross (final String target) {
-        return  ( target.compareToIgnoreCase(CROSS) == 0 ) ;
+    private boolean isCross (final int target) {
+        return  ( target == CROSS ) ;
     }
 }
