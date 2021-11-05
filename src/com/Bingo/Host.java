@@ -1,12 +1,21 @@
 /*
- *  Author      :       Lee Kai Pui (210 339 487) 
- *  
+ *  Author      :       Lee Kai Pui (210 339 487)
+ *
  *  Describle   :       This class is for host a game of bingo .
- *                      Also it is an interface to call the mothod 
+ *                      Also it is an interface to call the mothod
  *                      from player's card class.
- *                   
+ *
  *  Last modify :       2-11-2021 (17:50) HKT
- * 
+ *
+ * //   -2
+        16
+        10
+        10
+        22
+        6
+        20
+        18
+        23
  */
 
 
@@ -14,35 +23,56 @@ package com.Bingo;
 
 public class Host {
 //----------------------- [constructor] -------------------------------------
-    
+
     public Host(Player... players) {
 
+        // create an array to store all player that pass in
         this.registerPlayer(players);
+
+        // this is a default value
+        // assume the range is from 0 to Player's card row size * column size
+        maxValue = maxInput();
 
         // create an array to track the input inputted
         // maxInput return max possible number of integer can be inputted
-        maxValue = maxInput();
-        histroicalInput = new int[maxValue];
+        histroicalInput = new int[ maxInput() ];
 
 
     }
 
-    public Host() {
-           
-        // create a array to track the input
-        // maxInput return maximum possible number of integer can be inputted
-        histroicalInput = new int[this.maxInput()];
-        maxValue = maxInput();
+    // hide the constructor
+    private Host() {};
 
-    };
-//-----------------------------------------------------------------------------
+//------------------------- [ Setter ] ----------------------------------------
+
+    // set the minimum value that can inputted
+    public Host setMin(int min)
+    {
+        this.maxValue = min;
+        return this;
+    }
+
+    // set the maxmum value that can inputted
+    public Host setMax(int max)
+    {
+        this.maxValue = max;
+        return this;
+    }
 
 
+//--------------------------- [ Public method ] -------------------------------
+
+
+    // show the card hold by player
     public void showPlayersCard() {
-        for (Player player : playerSet) {
 
+        for (Player player : playerSet) {
+            // prompt user which user now
             System.out.printf("%s's Card\n" , player);
+
             player.getCard().showCard();
+
+            // goto nextline to separte player
             System.out.println();
 
         }
@@ -50,75 +80,82 @@ public class Host {
 
     // check if the input is in the range
     public boolean isInRange(int number ) {
-        return (number > minValue && number < maxValue);  
+        return (number > minValue && number < maxValue);
     }
 
     // check if the input isn't repeat
     public boolean isRepeatedInput(int number) {
-     
+
         // if the input appear in histroicalInput array
         // it is not a vaild input
         for(int x : histroicalInput) {
-            if (x == number) 
+            if (x == number)
                 return true;
         }
-
-        return false;  
+        //  default
+        return false;
     }
 
     public void update(int number) {
 
-        // track the input isn't being input
+        // To track the input isn't being input
         histroicalInput[inputCount++] = number;
-        
+
         // foreach player in this game
-        // call the update method
-        // to replace number with "XX"
+        // call the updateCard(int) method
         for (Player x : playerSet) {
             x.getCard().updateCard(number);
         }
     }
 
-    // terminate does any one of the player is bingo 
-    // if yes then prompt user and set the parameter to break out the game loopo
+    // terminate does any one of the player is bingo
+    // if yes then prompt user and set the parameter to break out the game loop
     public void Bingo() {
-        for (Player player : playerSet ) {
-            if (player.bingo()) {
+        for (Player player : playerSet )
+        {
+            if (player.bingo())
+            {
                 System.out.printf ("%s Bingo" , player);
-                this.status = true;
 
+                // used for end the game
+                this.gameStaus = true;
             }
 
         }
     }
 
 
-    
+    // terminate does any one of the player get Bingo
+    // if yes , then the game will be end
     public final boolean endGame () {
-       return this.status;
+       return this.gameStaus;
     }
 //-----------------------------------------------------------------------------
 // method to set up the game
-    public void registerPlayer(Player... players) {
-        
+
+    // to track the player in this instance
+    private void registerPlayer(Player... players) {
         int newSize = players.length + playerNo;
-        Player[] temp = new Player[newSize];
+        Player[] tempArr = new Player[newSize];
 
         // clone element into temp arr
         for (int i = 0 ; i < playerNo ; ++i) {
-            temp[i] = playerSet[i];
+            tempArr[i] = playerSet[i];
         }
 
+        // clone the parameter into temp arr
         for (int i = playerNo ; i < newSize ; ++i) {
-            temp[i] = players[i - playerNo];
+            tempArr[i] = players[i - playerNo];
         }
-        
+
+        // update the playerSet to new arr
         playerSet = temp;
+        // update the size
         playerNo = newSize;
     }
 
 
-//-----------------------------------------------------------------------------
+//----------------------------[ For Test ]------------------------------------
 
 
     public void showPlayer() {
@@ -132,20 +169,25 @@ public class Host {
     }
 //-----------------------------------------------------------------------------
 
-    public final int maxInput() {
+    private final int maxInput() {
         // pretend all the player array is square matrix
         int max = 0;
 
+        // cursor
+        int current;
+
         for (Player x : playerSet ) {
 
-            if (x.getCard().SIZE > max ) {
-                max = x.getCard().SIZE;
+            current = x.getCard().SIZE;
+
+            if (current > max ) {
+                max = current;
             }
         }
 
         return max * max ;
     }
-    
+
 //-----------------------------------------------------------------------------
 
     // number of player
@@ -161,9 +203,9 @@ public class Host {
     private int inputCount;
 
     // the range of number on the card
-    private final int minValue = 0;
-    private final int maxValue;
+    private int minValue = 0;
+    private int maxValue;
 
     // track any player win the game
-    private boolean status = false;
+    private boolean gameStaus = false;
 }

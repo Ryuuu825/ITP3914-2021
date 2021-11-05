@@ -7,7 +7,18 @@
  *                      This file is the main game loop.
  *  
  *  Create Date :       19-10-2021
- * 
+-2
+16
+10
+10 
+22
+6
+20 
+18
+2
+23
+
+
  */
 
 package com;
@@ -59,7 +70,7 @@ public class Main {
             
 
             // prompt user
-            System.out.printf("Game Host call (0 to exit): ");
+            System.out.printf("Game Host call (0 to exit): \n");
             input = sc.nextInt();
 
 
@@ -69,7 +80,7 @@ public class Main {
             // check is the input in the range
             if ( ! gameOne.isInRange(input)) 
             {
-                System.out.println("The number must be between 1 to 25, please call again! ");
+                System.out.println("The number must be between 1 to 25, please call again! \n");
                 continue;
             }
             // check if the input is inputted before
