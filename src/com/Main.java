@@ -1,19 +1,19 @@
 /*
  *  Author      :       Lee Kai Pui (210339487)
- * 
+ *
  *  File        :       Main.java
- * 
+ *
  *  Desrcibe    :       A simple Bingo console game.
  *                      This file is the main game loop.
- *  
+ *
  *  Create Date :       19-10-2021
 -2
 16
 10
-10 
+10
 22
 6
-20 
+20
 18
 2
 23
@@ -48,26 +48,22 @@ public class Main {
             {25,23,13,19,11},
             {22,4,9,1,2}
         };
-        
+
         // set up a game which have two player
-        Host gameOne = new Host( 
-                new Player("Player 1" , cardOne ) , 
-                new Player("Player 2" , cardTwo ) 
+        Host gameOne = new Host(
+                new Player("Player 1" , cardOne ) ,
+                new Player("Player 2" , cardTwo )
             );
 
-        
+
         // for receive input
         int input;
-        
-//-----------------------------------------------------------------------------
 
+//-------------------------- [ Main Game Loop ] ---------------------------------------------------
+         // show the all player's card at the begining
         gameOne.showPlayersCard();
 
-        // main game loop 
         while ( ! gameOne.endGame() ) {
-
-            
-            
 
             // prompt user
             System.out.printf("Game Host call (0 to exit): \n");
@@ -78,7 +74,7 @@ public class Main {
             if (input == 0) { break; }
 
             // check is the input in the range
-            if ( ! gameOne.isInRange(input)) 
+            if ( ! gameOne.isInRange(input))
             {
                 System.out.println("The number must be between 1 to 25, please call again! \n");
                 continue;
@@ -89,31 +85,27 @@ public class Main {
                 System.out.printf("The number %d is repeated, please call again!\n" , input);
                 continue;
             }
+            // the input are valid
             else
             {
-                
-                // update player's card
+
+                // update all player's card
                 gameOne.update(input);
-                
-                // show the array at the end of the loop
+
+                // show the card that hold by the player at the end of the loop
                 gameOne.showPlayersCard();
 
-
                 // check does anyone bingo
-                // won't show anything if no one bingo
+                // prompt user and end the game if someone bingo
                 gameOne.Bingo();
 
-            }          
+            }
 
 
         }
-        
-        // close the scanenr 
+
+        // close the scanenr before the program end
         sc.close();
 
-        
-        
-
-
-    } 
+    }
 }

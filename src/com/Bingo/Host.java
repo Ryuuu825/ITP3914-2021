@@ -5,17 +5,7 @@
  *                      Also it is an interface to call the mothod
  *                      from player's card class.
  *
- *  Last modify :       2-11-2021 (17:50) HKT
- *
- * //   -2
-        16
-        10
-        10
-        22
-        6
-        20
-        18
-        23
+ *  Create date :       19-10-2021
  */
 
 
@@ -24,7 +14,8 @@ package com.Bingo;
 public class Host {
 //----------------------- [constructor] -------------------------------------
 
-    public Host(Player... players) {
+    public Host(Player... players)
+    {
 
         // create an array to store all player that pass in
         this.registerPlayer(players);
@@ -40,8 +31,10 @@ public class Host {
 
     }
 
-    // hide the constructor
-    private Host() {};
+    // default constructor
+    public Host() {
+        playerNo = 0;
+    };
 
 //------------------------- [ Setter ] ----------------------------------------
 
@@ -62,6 +55,11 @@ public class Host {
 
 //--------------------------- [ Public method ] -------------------------------
 
+    // builder of class Player instance
+    public void newPlayer(String name , int[][] arr )
+    {
+        this.registerPlayer(new Player(name, arr));
+    };
 
     // show the card hold by player
     public void showPlayersCard() {
@@ -80,7 +78,7 @@ public class Host {
 
     // check if the input is in the range
     public boolean isInRange(int number ) {
-        return (number > minValue && number < maxValue);
+        return (number >= minValue && number <= maxValue);
     }
 
     // check if the input isn't repeat
@@ -138,10 +136,14 @@ public class Host {
         int newSize = players.length + playerNo;
         Player[] tempArr = new Player[newSize];
 
-        // clone element into temp arr
-        for (int i = 0 ; i < playerNo ; ++i) {
-            tempArr[i] = playerSet[i];
+        if (playerNo != 0){
+            // clone element into temp arr
+            for (int i = 0 ; i < playerNo ; ++i) {
+                tempArr[i] = playerSet[i];
+            }
         }
+
+
 
         // clone the parameter into temp arr
         for (int i = playerNo ; i < newSize ; ++i) {
@@ -149,7 +151,7 @@ public class Host {
         }
 
         // update the playerSet to new arr
-        playerSet = temp;
+        playerSet = tempArr;
         // update the size
         playerNo = newSize;
     }
@@ -196,14 +198,13 @@ public class Host {
     private Player[] playerSet;
 
     // store the histroical input
-    // static array
     private int[] histroicalInput;
 
     // used for input into histroicalInput
     private int inputCount;
 
     // the range of number on the card
-    private int minValue = 0;
+    private int minValue = 1;
     private int maxValue;
 
     // track any player win the game

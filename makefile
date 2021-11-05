@@ -9,19 +9,16 @@ FILE = \
 
 OUTPUT_PATH = "./build"
 
+#TARGET = "com.Test"
 TARGET = "com.Main"
 
 default: class
 	java -cp $(OUTPUT_PATH) $(TARGET)
 
-class: 
+class:
 	javac -d $(OUTPUT_PATH) $(FILE)
 
-excute: 
+excute:
 	java -cp $(OUTPUT_PATH) $(TARGET)
 clean:
 	rm -r ./build/*
-
-
-
-	
