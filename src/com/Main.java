@@ -28,8 +28,15 @@ import java.util.Scanner;
 
 public class Main {
 
+// --------------------------[ Visible in this class ] ------------------------------
+
+    // for receive input
     public static Scanner sc = new Scanner(System.in);
+    
+
+
     public static void main(String[] args) {
+        int input;
 
         // set up array need by player one
         final int[][] cardOne = {
@@ -56,50 +63,33 @@ public class Main {
             );
 
 
-        // for receive input
-        int input;
 
 //-------------------------- [ Main Game Loop ] ---------------------------------------------------
-         // show the all player's card at the begining
+
+        // show the all player's card at the begining
         gameOne.showPlayersCard();
 
         while ( ! gameOne.endGame() ) {
 
             // prompt user
             System.out.printf("Game Host call (0 to exit): \n");
-            input = sc.nextInt();
-
+            
+            // keep receive input util have a valid input
+            input = validInput(gameOne);
 
             // exit the program if input is 0
             if (input == 0) { break; }
+            
+            // update all player's card
+            gameOne.update(input);
 
-            // check is the input in the range
-            if ( ! gameOne.isInRange(input))
-            {
-                System.out.println("The number must be between 1 to 25, please call again! \n");
-                continue;
-            }
-            // check if the input is inputted before
-            else if (gameOne.isRepeatedInput(input))
-            {
-                System.out.printf("The number %d is repeated, please call again!\n" , input);
-                continue;
-            }
-            // the input are valid
-            else
-            {
+            // show the card that hold by the player at the end of the loop
+            gameOne.showPlayersCard();
 
-                // update all player's card
-                gameOne.update(input);
+            // check does anyone bingo
+            // prompt user and end the game if someone bingo
+            gameOne.Bingo();
 
-                // show the card that hold by the player at the end of the loop
-                gameOne.showPlayersCard();
-
-                // check does anyone bingo
-                // prompt user and end the game if someone bingo
-                gameOne.Bingo();
-
-            }
 
 
         }
@@ -107,5 +97,44 @@ public class Main {
         // close the scanenr before the program end
         sc.close();
 
+        // exit the program
+
     }
+
+
+    // Keep loop util receive a valid input
+    public static int validInput(final Host game) 
+    {
+        int temp; 
+
+        while (true) 
+        {
+                // receive an input
+                temp = sc.nextInt();
+                
+                // exit signal inputted by user
+                // also count as valid input
+                if ( temp == 0 ) { return 0 ; }
+
+                // check if the input is in the range
+                if ( ! game.isInRange(temp))
+                {
+                    System.out.println("The number must be between 1 to 25, please call again! \n");
+                    continue;
+                }
+                // check if the input is inputted before
+                else if (game.isRepeatedInput(temp))
+                {
+                    System.out.printf("The number %d is repeated, please call again!\n" , temp);
+                    continue;
+                }
+                else 
+                {
+                    return temp;
+                }
+            
+        }
+    }
+
+    
 }

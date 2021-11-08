@@ -94,14 +94,14 @@ public class Host {
         return false;
     }
 
-    public void update(int number) {
+    public void update(final int number) {
 
         // To track the input isn't being input
         histroicalInput[inputCount++] = number;
 
         // foreach player in this game
         // call the updateCard(int) method
-        for (Player x : playerSet) {
+        for ( Player x : playerSet ) {
             x.getCard().updateCard(number);
         }
     }

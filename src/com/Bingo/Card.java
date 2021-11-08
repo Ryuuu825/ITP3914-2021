@@ -116,7 +116,7 @@ public class Card {
     }
 
 
-    /* check does the "XX" arrange on their card in from left to right disgonal form 
+    /* check does the "X" arrange on their card in from left to right disgonal form 
      *
      * Example :
      *      
@@ -244,9 +244,9 @@ public class Card {
     protected final int SIZE;
 
     // pre-define word
-    // -1 is used for exit the game that never pass into updateCard() 
-    // so -1 is most suitable 
-    final private int CROSS = -1;
+    // 0 is used for exit the game that never pass into updateCard() 
+    // so 0 is most suitable 
+    final private int CROSS = 0;
 
 
 

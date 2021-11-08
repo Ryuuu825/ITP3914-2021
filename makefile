@@ -1,4 +1,3 @@
-##.SUFFIXES: .java .class
 FILE = \
         src/com/Main.java \
         src/com/Bingo/Player.java \
@@ -9,16 +8,18 @@ FILE = \
 
 OUTPUT_PATH = "./build"
 
+COMPILER = javac 
+
 #TARGET = "com.Test"
 TARGET = "com.Main"
 
-default: class
+excute: class
 	java -cp $(OUTPUT_PATH) $(TARGET)
 
-class:
+class: ./src/com/Main.java
 	javac -d $(OUTPUT_PATH) $(FILE)
 
-excute:
-	java -cp $(OUTPUT_PATH) $(TARGET)
+
+
 clean:
 	rm -r ./build/*
