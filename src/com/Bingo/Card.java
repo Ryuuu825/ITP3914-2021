@@ -222,9 +222,9 @@ public class Card {
             for (final int current : row) 
             { 
                 if ( current == CROSS ) 
-                    System.out.printf("XX\t");
+                    System.out.printf(" XX ");
                 else
-                    System.out.printf("%d\t" ,  current);
+                    System.out.printf(" %2d " ,  current);
             }
             // go to nextline of each row
             System.out.println();

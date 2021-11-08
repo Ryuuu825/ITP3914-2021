@@ -7,6 +7,7 @@
  *                      This file is the main game loop.
  *
  *  Create Date :       19-10-2021
+28
 -2
 16
 10
@@ -119,7 +120,7 @@ public class Main {
                 // check if the input is in the range
                 if ( ! game.isInRange(temp))
                 {
-                    System.out.println("The number must be between 1 to 25, please call again! \n");
+                    System.out.println("The number must be between 1 to 25, please call again!");
                     continue;
                 }
                 // check if the input is inputted before
