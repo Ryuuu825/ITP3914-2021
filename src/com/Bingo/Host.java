@@ -113,7 +113,7 @@ public class Host {
         {
             if (player.bingo())
             {
-                System.out.printf ("%s Bingo" , player);
+                System.out.printf ("%s Bingo!\n" , player);
 
                 // used for end the game
                 this.gameStaus = true;

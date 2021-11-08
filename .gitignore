@@ -6,6 +6,3 @@ build
 
 # prevent bad thing 
 ./docs/Assignment2122_v1.pdf
-
-# until program is ready to go
-./log/*

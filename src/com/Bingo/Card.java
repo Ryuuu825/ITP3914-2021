@@ -24,7 +24,7 @@ public class Card {
 //------------------------ [ Constructor ] ------------------------------------
 
     // any instances of Card is not allow to point to same array
-    // the array should be square matrix
+    // Also , the array should be square matrix
 
     public Card (final int[][] arr) 
     {
@@ -34,6 +34,7 @@ public class Card {
         // deep copy
         this.cardArray = copyArr(arr);
 
+        // the size of the array
         this.SIZE = this.cardArray.length;
     }
 
@@ -42,7 +43,7 @@ public class Card {
     {
         this.cardArray = copyArr(other.cardArray);
 
-        this.SIZE = this.cardArray.length;
+        this.SIZE = other.SIZE;
 
     }
 
@@ -58,22 +59,22 @@ public class Card {
      *      iterate each row and check condition above.
      *      goto next iteration early if one element in that row isn't CROSS
      */
-    private final boolean checkRow() {
-        
+    private final boolean checkRow() 
+    {
         // cursor
         int current;
 
         NEXTROW : 
-            for (int row = 0 ; row < this.SIZE ; ++row) {
+            for (int row = 0 ; row < this.SIZE ; ++row)
+            {
 
-                for (int column = 0 ; column < this.SIZE ; ++column) {
+                for (int column = 0 ; column < this.SIZE ; ++column) 
+                {
 
                     current = this.cardArray[row][column];
 
                     // goto next row if one element isn't "XX"
-                    if (! isCross(current)) {
-                        continue NEXTROW;
-                    }
+                    if (! isCross(current)) { continue NEXTROW; }
                 }
                 // all element in that row is "XX" when the porgram able to reach here
                 return true;
@@ -91,12 +92,20 @@ public class Card {
      *      iterate each column and check condition above 
      *      Goto next iteratation earily if one element in that column isn't CROSS 
      */
-    private final boolean checkColumn() {
+    private final boolean checkColumn() 
+    {
+        //cursor
+        int current;
+
         NEXTCOL:
-            for (int column = 0  ; column < this.SIZE ; ++column ) {
-                for (int row = 0 ; row < this.SIZE ; ++row ) {
-                    if ( this.cardArray[row][column] != CROSS ) 
-                        continue NEXTCOL;
+            for (int column = 0  ; column < this.SIZE ; ++column ) 
+            {
+                for (int row = 0 ; row < this.SIZE ; ++row ) 
+                {
+
+                    current = this.cardArray[row][column];
+                    // goto next outter iteration early
+                    if ( ! isCross(current) ) { continue NEXTCOL;}
                 }
                 // that mean all element is that column are CROSS
                 // if the program able to reach here
@@ -107,12 +116,75 @@ public class Card {
     }
 
 
+    /* check does the "XX" arrange on their card in from left to right disgonal form 
+     *
+     * Example :
+     *      
+     *          X 2 3 [0,0]
+     *          1 X 4 [1,1]
+     *          5 6 X [2,2]
+     * 
+     * Implement :
+     *      Since the index of the CROSS is a pair 
+     *      And the last index is the SIZE - 1
+     *      So iterate from 0 to SIZE - 1
+     *      Early return false if one of the element isn't CROSS
+     *
+     */
+    private final boolean checkLeftDiagonal() 
+    {
+        // cursor
+        int current;
+
+        // 1D loop
+        for (int i = 0 ; i < this.SIZE ; ++i ) 
+        {
+            current = this.cardArray[i][i];
+
+            // ALL element need to be CROSS in this loop to get bingo
+            if ( ! isCross(current) ) { return false; }
+
+        }
+
+        return true;
+    }
+
+    
+    /* check does the "XX" arrange on their card in from right to left disgonal form 
+     *
+     * Example :
+     *      
+     *          1 2 X [0,2]
+     *          3 X 4 [1,1]
+     *          X 5 6 [2,0]
+     * 
+     * Implement :
+     *      Note that first CROSS's row index is 0 , the column index is SIZE - 1
+     *      Just simply follow the pattern and early return false if one of the element not CROSS
+     *
+     */
+    private final boolean checkRightDiagonal() 
+    {
+        // cursor
+        int current; 
+
+        // 1D loop
+        for (int row = 0 , column = SIZE - 1; column >= 0 ; ++row , --column) 
+        {
+            current = this.cardArray[row][column];
+
+            // ALL element need to be CROSS in this loop to get bingo
+            if ( ! isCross(current) ) {return false;}
+        }
+        return true;
+    }
+
 //--------------------------- [ Main Method ] ------------------------------
 
     // terminate if this instance is bingo or not
     protected boolean haveBingo() 
     {
-        return checkRow() || checkColumn();
+        return checkRow() || checkColumn() || checkLeftDiagonal() || checkRightDiagonal();
     }
 
 
