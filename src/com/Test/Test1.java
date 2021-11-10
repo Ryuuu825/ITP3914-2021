@@ -1,5 +1,11 @@
-// Wrote a small test to test some function 
-// and see if they work as I expected
+/*	
+ *	Author 		:	Lee Kai Pui (210339487) (IT114105/1B)
+ *	
+ *	File 		: 	Test.java
+ *	
+ *	Describe	: Wrote a small test to test some function use in Main:wq
+ *			      and see if they work as I expected.
+ */
 
 package com.Test;
 import com.Bingo.*;
@@ -25,6 +31,7 @@ public class Test1 {
             {22,4,9,1,2}
         };
 
+        // setup the game
         Host testGame = new Host(
             new Player("player 1" , cardOne)
         );

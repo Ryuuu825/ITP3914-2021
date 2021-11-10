@@ -1,5 +1,5 @@
 /*
- *  Author      :       Lee Kai Pui (210 339 487)
+ *  Author      :       Lee Kai Pui (210 339 487) (IT114105/1B)
  *
  *  Describle   :       A class interact with Card instance
  *

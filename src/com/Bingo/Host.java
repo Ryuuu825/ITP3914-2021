@@ -1,5 +1,5 @@
 /*
- *  Author      :       Lee Kai Pui (210 339 487)
+ *  Author      :       Lee Kai Pui (210 339 487) (IT114105/1B)
  *
  *  Describle   :       This class is for host a game of bingo .
  *                      Also it is an interface to call the mothod
