@@ -1,3 +1,6 @@
+// Wrote a small test to test some function 
+// and see if they work as I expected
+
 package com.Test;
 import com.Bingo.*;
 
@@ -59,10 +62,5 @@ public class Test1 {
 
         // assert(testGame.endGame());
         System.out.println(testGame.endGame());
-        
-        
-
-
-
     }
 }
