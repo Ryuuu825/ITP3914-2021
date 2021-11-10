@@ -36,3 +36,7 @@ class Main
 + Player player1;
 + Player playee2;
 + Game Game1;
+
+
+Game Loop
+-> input -> update -> print card -> check end or not

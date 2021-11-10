@@ -8,7 +8,7 @@
  *                      ->  show the card 
  *                      ->  update the card
  *                  
- *                  The Player class can shard the same instance of <Card> class.
+ *                  The Player class can shared the same instance of <Card> class.
  * 
  *  
  * 
@@ -28,19 +28,22 @@ public class Card {
 
     public Card (final int[][] arr) 
     {
+	    // error checking
         // checking if the array past in isn't a square matrix
-        checkSquareMatrix(arr);
+        isSquareMatrix(arr);
 
-        // deep copy
+        // deep copy of the parameter
         this.cardArray = copyArr(arr);
 
         // the size of the array
         this.SIZE = this.cardArray.length;
     }
 
-    // deep copy
+
+    // deep copy of the parameter
     public Card (final Card other)
     {
+        // not allow to point to the same array
         this.cardArray = copyArr(other.cardArray);
 
         this.SIZE = other.SIZE;
@@ -67,28 +70,29 @@ public class Card {
         NEXTROW : 
             for (int row = 0 ; row < this.SIZE ; ++row)
             {
-
                 for (int column = 0 ; column < this.SIZE ; ++column) 
                 {
-
+                    // update current
                     current = this.cardArray[row][column];
 
-                    // goto next row if one element isn't "XX"
-                    if (! isCross(current)) { continue NEXTROW; }
+                    // goto next row if one element isn't CROSS
+                    if (! isCross(current))
+                        continue NEXTROW; 
                 }
-                // all element in that row is "XX" when the porgram able to reach here
+                // all element in that row is CROSS  when the porgram able to reach here
                 return true;
             }
         // default
         return false;
     }
 
+
     /*
      * check does any one of the row have "XX" arranged on their card in same column
      * which mean that all element in that column are "XX"
      * 
      *  Implement:
-     *      simialr with acheckRow
+     *      simialiar with checkRow
      *      iterate each column and check condition above 
      *      Goto next iteratation earily if one element in that column isn't CROSS 
      */
@@ -102,10 +106,12 @@ public class Card {
             {
                 for (int row = 0 ; row < this.SIZE ; ++row ) 
                 {
-
+                    // update current
                     current = this.cardArray[row][column];
+
                     // goto next outter iteration early
-                    if ( ! isCross(current) ) { continue NEXTCOL;}
+                    if ( ! isCross(current) ) 
+                         continue NEXTCOL;
                 }
                 // that mean all element is that column are CROSS
                 // if the program able to reach here
@@ -142,8 +148,8 @@ public class Card {
             current = this.cardArray[i][i];
 
             // ALL element need to be CROSS in this loop to get bingo
-            if ( ! isCross(current) ) { return false; }
-
+            if ( ! isCross(current) ) 
+                return false; 
         }
 
         return true;
@@ -159,7 +165,7 @@ public class Card {
      *          X 5 6 [2,0]
      * 
      * Implement :
-     *      Note that first CROSS's row index is 0 , the column index is SIZE - 1
+     *      Note that  CROSS's row index is from 0 to SIZE -1 , the column index is from SIZE - 1 to 0
      *      Just simply follow the pattern and early return false if one of the element not CROSS
      *
      */
@@ -174,7 +180,8 @@ public class Card {
             current = this.cardArray[row][column];
 
             // ALL element need to be CROSS in this loop to get bingo
-            if ( ! isCross(current) ) {return false;}
+            if ( ! isCross(current) ) 
+                return false;
         }
         return true;
     }
@@ -204,8 +211,8 @@ public class Card {
         // return empty array if not found
         int[] targetIndex = this.searchIndex(target);
 
-        if ( isEmpty(targetIndex) ) { return; };
-       
+        if ( isEmpty(targetIndex) ) 
+		    return; 
 
         int row = targetIndex[0];
         int column = targetIndex[1];
@@ -214,7 +221,7 @@ public class Card {
 
 
     // print all element in the array
-    // print "XX" if the element is occupied (which is -1)
+    // print "XX" if the element is occupied (which is 0)
     protected void showCard() 
     {
         for (final int[] row : this.cardArray)
@@ -224,6 +231,7 @@ public class Card {
                 if ( current == CROSS ) 
                     System.out.printf(" XX ");
                 else
+                    // formatting 
                     System.out.printf(" %2d " ,  current);
             }
             // go to nextline of each row
@@ -246,13 +254,10 @@ public class Card {
     // pre-define word
     // 0 is used for exit the game that never pass into updateCard() 
     // so 0 is most suitable 
-    final private int CROSS = 0;
+    final static public int CROSS = 0;
 
-
-
-    
    
-//----------------------- Private Method -----------------------------------
+//----------------------- [ Private Method ] -----------------------------------
 
     /* 
      * this method search the element in the array 
@@ -260,25 +265,25 @@ public class Card {
      * else return a empty int[]
      * please remind that only return first match value
      */
-    private final int[] searchIndex (final int target)  {
+    private final int[] searchIndex (final int target)  
+    {
  
          // cursor
          int current;
         
-         // using O(n^2)
-
          // iterate each element and compare are they same
-         for (int row = 0 ; row < this.cardArray.length ; ++row) {
- 
-             for (int column = 0 ; column < this.cardArray[row].length ; ++column) {
-                 
-                 current = this.cardArray[row][column];
- 
-                 if ( current == target ) {
-                     return new int[] {row,column};
-                 }
-             }
+         for (int row = 0 ; row < this.cardArray.length ; ++row) 
+         {
+            for (int column = 0 ; column < this.cardArray[row].length ; ++column) 
+            {
+                current = this.cardArray[row][column];
+
+                // return an array contain the index
+                if ( current == target ) { return new int[] {row,column}; }
+        
+            }
          }
+
          // return a empty array if not found
          return new int[] {};
     }
@@ -287,19 +292,22 @@ public class Card {
 
     // Copy the value of the parameter (2D array) to a new 2D array
     // and return the new array
-    private int[][] copyArr(final int[][] arr) {
+    private int[][] copyArr(final int[][] arr) 
+    {
 
         // copy the value in the array to a new array
 
         final int rowLen = arr.length;
         int[][] temp = new int[rowLen][]; // 2D arr
 
-        for (int row = 0 ; row < rowLen ; ++row) {
-
+        for (int row = 0 ; row < rowLen ; ++row) 
+        {
+            // get the len and create an 1D array] with size {len}
             final int columnLen = arr[row].length;
             temp[row] = new int[columnLen]; // 1D arr
 
-            for (int column = 0 ; column < columnLen ; ++column) {
+            for (int column = 0 ; column < columnLen ; ++column) 
+            {
                 // copy by value not references
                 temp[row][column] = Integer.valueOf( arr[row] [column] );
             }
@@ -308,12 +316,14 @@ public class Card {
         return temp;
     }
 
+
     // ensure the array have same row size and column size
-    private boolean checkSquareMatrix ( final int arr[][] ) 
+    private boolean isSquareMatrix ( final int arr[][] ) 
     {
         final int rowSize = arr.length;
 
-        for (int i = 0 ; i < rowSize ; ++i ) {
+        for (int i = 0 ; i < rowSize ; ++i ) 
+        {
             if (arr[i].length != rowSize )
                 // use print error to replace throw exception
                 System.err.println("Not a square matrix");
@@ -321,11 +331,15 @@ public class Card {
         return true;
     }
 
-    private boolean isEmpty(final int[] targetArr) {
+
+    private boolean isEmpty(final int[] targetArr) 
+    {
         return ( targetArr.length == 0 );
     }
 
-    private boolean isCross (final int target) {
+
+    private boolean isCross (final int target) 
+    {
         return  ( target == CROSS ) ;
     }
 }

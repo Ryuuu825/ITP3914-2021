@@ -16,7 +16,7 @@
 
 ## Description 
 
-A simple Bingo game run on the console. [Example](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+A simple Bingo game run on the console. [Example](https://youtu.be/ANwucID0vAo)
 
 The porgram will display two players' card on the screen. To meet the requirment of the assignment , the arrangememt of 25 numbers on the cards are ***fixed*** by default. Also , a game host need to input a number to program. According to the corresponding number on players' cards, the game will mark a "XX" to replace the number if the number are the same. The program will terminate when player / players win.
 
@@ -59,20 +59,33 @@ make class
 javac -d "./build" src/com/Main.java src/com/Bingo/*.java 
 ```
 
-***
+# What inside the directory?
+
+```
+.
+├── Hey.sh
+├── README.md
+├── build
+│   └── com
+│       ├── Bingo
+│       └── Test
+├── docs
+│   ├── Abstract_idea.txt
+│   └── Assignment2122_v1.pdf
+├── log
+│   └── default_testcase.log
+├── makefile
+├── photo
+│   └── win_example.png
+└── src
+    └── com
+        ├── Bingo
+        │   ├── Card.java
+        │   ├── Host.java
+        │   └── Player.java
+        ├── Main.java
+        └── Test
+            └── Test1.java
+```
 
 
-
-
-## TO-DO_LIST
-
-- [] the array must be int[][]
-- [] refactor the code
-    -> (public method first)
-- [] keep refactor 
-- [] array need to be square matrix
-- [] able to use register player after create instance of Host
-- [] algoritrm about terminate winning
-
-## Code quality
-![adf](./photo/code_analyze.png)

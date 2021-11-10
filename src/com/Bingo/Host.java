@@ -22,17 +22,18 @@ public class Host {
 
         // this is a default value
         // assume the range is from 0 to Player's card row size * column size
+        // and increase by 1
         maxValue = maxInput();
 
         // create an array to track the input inputted
         // maxInput return max possible number of integer can be inputted
         histroicalInput = new int[ maxInput() ];
-
-
     }
 
+
     // default constructor
-    public Host() {
+    public Host() 
+    {
         playerNo = 0;
     };
 
@@ -45,6 +46,7 @@ public class Host {
         return this;
     }
 
+
     // set the maxmum value that can inputted
     public Host setMax(int max)
     {
@@ -56,16 +58,18 @@ public class Host {
 //--------------------------- [ Public method ] -------------------------------
 
     // builder of class Player instance
-    public void newPlayer(String name , int[][] arr )
+    public void newPlayer(final String name , final int[][] arr )
     {
         this.registerPlayer(new Player(name, arr));
     };
 
-    // show the card hold by player
-    public void showPlayersCard() {
 
-        for (Player player : playerSet) {
-            // prompt user which user now
+    // show the card hold by player
+    public void showPlayersCard() 
+    {
+        for (Player player : playerSet) 
+        {
+            // prompt user which player now
             System.out.printf("%s's Card\n" , player);
 
             player.getCard().showCard();
@@ -76,17 +80,22 @@ public class Host {
         }
     }
 
+
     // check if the input is in the range
-    public boolean isInRange(int number ) {
+    public boolean isInRange(int number ) 
+    {
         return (number >= minValue && number <= maxValue);
     }
 
+
     // check if the input isn't repeat
-    public boolean isRepeatedInput(int number) {
+    public boolean isRepeatedInput(int number) 
+    {
 
         // if the input appear in histroicalInput array
         // it is not a vaild input
-        for(int x : histroicalInput) {
+        for(int x : histroicalInput) 
+        {
             if (x == number)
                 return true;
         }
@@ -94,21 +103,25 @@ public class Host {
         return false;
     }
 
-    public void update(final int number) {
+
+    public void update(final int number) 
+    {
 
         // To track the input isn't being input
         histroicalInput[inputCount++] = number;
 
         // foreach player in this game
         // call the updateCard(int) method
-        for ( Player x : playerSet ) {
+        for ( Player x : playerSet ) 
+        {
             x.getCard().updateCard(number);
         }
     }
 
     // terminate does any one of the player is bingo
     // if yes then prompt user and set the parameter to break out the game loop
-    public void Bingo() {
+    public void Bingo() 
+    {
         for (Player player : playerSet )
         {
             if (player.bingo())
@@ -116,7 +129,7 @@ public class Host {
                 System.out.printf ("%s Bingo!\n" , player);
 
                 // used for end the game
-                this.gameStaus = true;
+                this.gameStatus = true;
             }
 
         }
@@ -125,11 +138,26 @@ public class Host {
 
     // terminate does any one of the player get Bingo
     // if yes , then the game will be end
-    public final boolean endGame () {
-       return this.gameStaus;
+    public final boolean endGame () 
+    {
+       return this.gameStatus;
     }
-//-----------------------------------------------------------------------------
-// method to set up the game
+
+
+    public void showPlayer() 
+    {
+        for (int i = 0 ; i < playerNo ; ++i ) {
+            System.out.printf("Player %d : %s\n" , i+1 , playerSet[i]);
+        }
+    }
+
+
+    public final int numOfPlayer() 
+    {
+        return playerNo;
+    }
+
+//---------------------- [ Private Method ] -----------------------------------
 
     // to track the player in this instance
     private void registerPlayer(Player... players) {
@@ -137,13 +165,11 @@ public class Host {
         Player[] tempArr = new Player[newSize];
 
         if (playerNo != 0){
-            // clone element into temp arr
+            // clone element in playerSet into temp arr
             for (int i = 0 ; i < playerNo ; ++i) {
                 tempArr[i] = playerSet[i];
             }
         }
-
-
 
         // clone the parameter into temp arr
         for (int i = playerNo ; i < newSize ; ++i) {
@@ -151,25 +177,12 @@ public class Host {
         }
 
         // update the playerSet to new arr
-        playerSet = tempArr;
+        // this array is dymanic 
+        this.playerSet = tempArr;
         // update the size
-        playerNo = newSize;
+        this.playerNo = newSize;
     }
 
-
-//----------------------------[ For Test ]------------------------------------
-
-
-    public void showPlayer() {
-        for (int i = 0 ; i < playerNo ; ++i ) {
-            System.out.printf("Player %d : %s\n" , i+1 , playerSet[i]);
-        }
-    }
-
-    public final int numOfPlayer() {
-        return playerNo;
-    }
-//-----------------------------------------------------------------------------
 
     private final int maxInput() {
         // pretend all the player array is square matrix
@@ -179,7 +192,6 @@ public class Host {
         int current;
 
         for (Player x : playerSet ) {
-
             current = x.getCard().SIZE;
 
             if (current > max ) {
@@ -194,7 +206,9 @@ public class Host {
 
     // number of player
     private int playerNo=0;
+    
     // array of the player in *this game
+    // a dymanic array
     private Player[] playerSet;
 
     // store the histroical input
@@ -208,5 +222,5 @@ public class Host {
     private int maxValue;
 
     // track any player win the game
-    private boolean gameStaus = false;
+    private boolean gameStatus = false;
 }

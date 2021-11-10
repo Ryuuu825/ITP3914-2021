@@ -7,19 +7,6 @@
  *                      This file is the main game loop.
  *
  *  Create Date :       19-10-2021
-28
--2
-16
-10
-10
-22
-6
-20
-18
-2
-23
-
-
  */
 
 package com;
@@ -35,8 +22,8 @@ public class Main {
     public static Scanner sc = new Scanner(System.in);
     
 
-
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         int input;
 
         // set up array need by player one
@@ -70,8 +57,8 @@ public class Main {
         // show the all player's card at the begining
         gameOne.showPlayersCard();
 
-        while ( ! gameOne.endGame() ) {
-
+        while ( ! gameOne.endGame() ) 
+        {
             // prompt user
             System.out.printf("Game Host call (0 to exit): \n");
             
@@ -79,7 +66,8 @@ public class Main {
             input = validInput(gameOne);
 
             // exit the program if input is 0
-            if (input == 0) { break; }
+            if (input == 0) 
+                break; 
             
             // update all player's card
             gameOne.update(input);
