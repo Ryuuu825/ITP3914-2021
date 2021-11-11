@@ -8,8 +8,8 @@
     Student ID  :       210339487
     Lanuage     :       Java
 
-    Moudle      :       ITP 3914 - Programming
-    Course      :       IT114105 - HP in Software Enginereeing
+    Module      :       ITP 3914 - Programming
+    Course      :       IT114105 - HD in Software Enginereeing
     Create Date :       19-10-2021
 
 ```
