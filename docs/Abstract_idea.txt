@@ -1,35 +1,73 @@
+/*
+ *  Author   :      Lee Kai Pui (210339487) (IT114105)
+ * 
+ *  Desrcibe :      Just brainstorm just idea before writing code
+ *
+ *  Last modify :   19-10-2021
+ *  
+ *  PLEASE note that this is not the final structure of the program
+ */
+
+-----------------------------------------------------------------------------
 class Player
+// store the card instance
 - Card card;
+// used to display the name of the Player
 - char name[];
 
 + Player(std::string name);
 + player(std::string name , Card card);
+
+// return the card instance hold by the Player
 + std::string[][] get_card();
 + std::string toString();
+
+-------------------------------------------------------------------------------
 
 class Card
 + Card(int row_size , int column_size);
 + Card(std::string array[][]);
-+ bool is_win();
+// update the number in the card to cross
+// which the number is input by the host
 + void update(int);
 
 - std::string array[][];
+// able to random generate the card
 - std::string[][] random_generate_array();
-- std::string[][] get_card();
+
+- std::string[][] get_array();
+
+// terminate if this instance holder able to bingo
++ bool is_win();
+// those four method is called by is_win()
 - bool check_row();
 - bool check_column();
 - bool check_diagonal();
 
-class Game
-- Player player_set[];
-- int input[];
-+ register_player(Player... players)
-+ void update_card(int);
-+ void show_card(Player player);
+// error-checking
+- bool is_valid_array(int array[][]);
 
+-------------------------------------------------------------------------------
+
+class Game
+// store all the player register in this instance
+- Player player_set[];
+// used for check if the input isn't valid
+- int input[];
++ void register_player(Player... players)
+
+// call the method update_card(int) in card instance 
++ void update_card(int);
+// show the player card and their name
++ void show_card(Player player);
+// builder of player
++ Player new_player(std::string , int[][])
+
+// terminate isn't the game end
 + bool is_win();
 + bool availble_input(int number);
 
+-------------------------------------------------------------------------------
 
 class Main
 + Scanner sc;
@@ -37,6 +75,7 @@ class Main
 + Player playee2;
 + Game Game1;
 
+-------------------------------------------------------------------------------
 
 Game Loop
 -> input -> update -> print card -> check end or not

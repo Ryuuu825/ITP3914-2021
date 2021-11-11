@@ -63,12 +63,16 @@ javac -d "./build" src/com/Main.java src/com/Bingo/*.java
 
 ```
 .
-├── Hey.sh
 ├── README.md
 ├── build
 │   └── com
 │       ├── Bingo
+│       │   ├── Card.class
+│       │   ├── Host.class
+│       │   └── Player.class
+│       ├── Main.class
 │       └── Test
+│           └── Test1.class
 ├── docs
 │   ├── Abstract_idea.txt
 │   └── Assignment2122_v1.pdf
