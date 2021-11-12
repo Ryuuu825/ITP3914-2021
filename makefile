@@ -10,7 +10,7 @@ OUTPUT_PATH = "./build"
 
 COMPILER = javac 
 
-TEST = "com.Test.Test1"
+TEST_DIR = "com.Test."
 MAIN = "com.Main"
 
 excute: class
@@ -21,8 +21,11 @@ class: ./src/com/Main.java
 
 
 test: 
-	javac -d $(OUTPUT_PATH) $(FILE) src/com/Test/Test1.java
-	java -cp $(OUTPUT_PATH) $(TEST)
+	javac -d $(OUTPUT_PATH) $(FILE) src/com/Test/*.java
+	java -cp $(OUTPUT_PATH) $(TEST_DIR)Test1
+	java -cp $(OUTPUT_PATH) $(TEST_DIR)Test2
+	java -cp $(OUTPUT_PATH) $(TEST_DIR)Test3
+
 
 clean:
 	find ./build -type f -name "*.class" -delete

@@ -3,8 +3,8 @@
  *	
  *	File 		: 	Test.java
  *	
- *	Describe	: Wrote a small test to test some function use in Main:wq
- *			      and see if they work as I expected.
+ *	Describe	:   Wrote a small test to test some function use in Main:wq
+ *			        and see if they work as I expected.
  */
 
 package com.Test;
