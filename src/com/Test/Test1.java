@@ -3,8 +3,9 @@
  *	
  *	File 		: 	Test.java
  *	
- *	Describe	:   Wrote a small test to test some function use in Main:wq
- *			        and see if they work as I expected.
+ *	Describe	:   Wrote a small test to test some function use in Main
+ *			        and see if they work as I expected.:wq
+ *  
  */
 
 package com.Test;
@@ -38,13 +39,11 @@ public class Test1 {
 
        
         // test constructor 
-        // assert(testGame.numOfPlayer() == 1 );
         System.out.println(testGame.numOfPlayer() == 1 );
 
 
         testGame.newPlayer("player 2 ", cardTwo);
 
-        // assert(testGame.numOfPlayer() == 2 );
         System.out.println(testGame.numOfPlayer() == 2);
 
         // default input 
@@ -66,8 +65,7 @@ public class Test1 {
             testGame.Bingo();
 
         }
-
-        // assert(testGame.endGame());
+        // test does the game able to finish
         System.out.println(testGame.endGame());
     }
 }

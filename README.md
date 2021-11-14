@@ -28,6 +28,22 @@ A player finds the selected numbers are arranged on their card in same row / col
 <img src="./photo/win_example.png" style="width:200px;"/>
 
 ***
+# Get Start (**Make sure you compile first**)
+
+## How to compile?
+
+### If you hava GNU's make
+
+```
+make class
+```
+
+### else
+
+```
+javac -d "./build" src/com/Main.java src/com/Bingo/*.java 
+```
+
 ## How to run ?
 
 ### If you hava GNU's make
@@ -44,20 +60,6 @@ java -cp "./build" com.Main
 
 ***
 
-## How to compile?
-
-### If you hava GNU's make
-
-
-```
-make class
-```
-
-### else
-
-```
-javac -d "./build" src/com/Main.java src/com/Bingo/*.java 
-```
 
 # What inside the directory?
 
@@ -72,7 +74,6 @@ javac -d "./build" src/com/Main.java src/com/Bingo/*.java
 │       │   └── Player.class
 │       ├── Main.class
 │       └── Test
-│           └── Test1.class
 ├── docs
 │   ├── Abstract_idea.txt
 │   └── Assignment2122_v1.pdf
@@ -83,13 +84,15 @@ javac -d "./build" src/com/Main.java src/com/Bingo/*.java
 │   └── win_example.png
 └── src
     └── com
-        ├── Bingo
-        │   ├── Card.java
+        ├── Bingo -> (Structure of the Bingo)
+        │   ├── Card.java <- (Here is something you may want to take a look)
         │   ├── Host.java
         │   └── Player.java
-        ├── Main.java
+        ├── Main.java -> (The Game)
         └── Test
-            └── Test1.java
+            ├── Test1.java
+            ├── Test2.java
+            └── Test3.java
 ```
 
 
