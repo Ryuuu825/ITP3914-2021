@@ -1,5 +1,4 @@
 #ignore Mac speific files
 .DS_Store
-
-# prevent bad thing 
+ 
 ./docs/Assignment2122_v1.pdf
