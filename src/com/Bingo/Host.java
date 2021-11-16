@@ -203,7 +203,7 @@ public class Host {
                 max = current;
             }
         }
-        // row size * column sizeß
+        // row size * column size
         return max * max ;
     }
 
