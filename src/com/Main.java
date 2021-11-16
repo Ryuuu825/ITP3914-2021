@@ -60,9 +60,7 @@ public class Main {
 
         while ( ! gameOne.isEndGame() ) 
         {
-            // prompt user
-            System.out.printf("Game Host call (0 to exit): ");
-            
+                        
             // keep receive input util have a valid input
             input = validInput(gameOne);
 
@@ -96,6 +94,8 @@ public class Main {
 
         while (true) 
         {
+                // prompt user
+                System.out.printf("Game Host call (0 to exit): ");
                 // receive an input
                 temp = sc.nextInt();
                 
