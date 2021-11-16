@@ -4,6 +4,8 @@
  *  Describle   :       A class interact with Card instance
  *
  *  Create date :       19-10-2021
+ *  Last Modify :       16-11-2021
+ * 
  *
  */
 
@@ -40,16 +42,6 @@ public class Player {
         return playerName;
     }
 
-    
-    // a public method to terminate if the player bingo
-    public final boolean bingo() 
-    {
-        if (this.playerCard.haveBingo() ) 
-            return true;
-
-        // default value
-        return false;
-    }
 
 
     // get the card hold by player

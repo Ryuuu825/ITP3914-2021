@@ -6,6 +6,8 @@
  *                      from player's card class.
  *
  *  Create date :       19-10-2021
+ *  Last Modify :       16-11-2021
+ * 
  */
 
 
@@ -21,12 +23,13 @@ public class Host {
         this.registerPlayer(players);
 
         // this is a default value
-        // assume the range is from 0 to Player's card row size * column size
+        // assume the range is from 0 to {Player's card row size * column size}
         // and increase by 1
+        // for example : 5 X 5 card the default max value is 25
         maxValue = maxInput();
 
         // create an array to track the input inputted
-        // maxInput return max possible number of integer can be inputted
+        // maxInput return max possible amount of integer can be inputted
         histroicalInput = new int[ maxInput() ];
     }
 
@@ -106,7 +109,6 @@ public class Host {
 
     public void update(final int number) 
     {
-
         // To track the input isn't being input
         histroicalInput[inputCount++] = number;
 
@@ -124,7 +126,7 @@ public class Host {
     {
         for (Player player : playerSet )
         {
-            if (player.bingo())
+            if (player.getCard().haveBingo() )
             {
                 System.out.printf ("%s Bingo!\n" , player);
 
@@ -138,7 +140,7 @@ public class Host {
 
     // terminate does any one of the player get Bingo
     // if yes , then the game will be end
-    public final boolean endGame () 
+    public final boolean isEndGame () 
     {
        return this.gameStatus;
     }
@@ -160,32 +162,35 @@ public class Host {
 //---------------------- [ Private Method ] -----------------------------------
 
     // to track the player in this instance
+    // copy value into new dymanic array
     private void registerPlayer(Player... players) {
-        int newSize = players.length + playerNo;
-        Player[] tempArr = new Player[newSize];
+        int newPlayerNo = players.length + playerNo;
+        // new playerSet array
+        Player[] newPlayerSet = new Player[newPlayerNo];
 
+        // copy from old array if player exist
         if (playerNo != 0){
             // clone element in playerSet into temp arr
             for (int i = 0 ; i < playerNo ; ++i) {
-                tempArr[i] = playerSet[i];
+                newPlayerSet[i] = playerSet[i];
             }
         }
 
         // clone the parameter into temp arr
-        for (int i = playerNo ; i < newSize ; ++i) {
-            tempArr[i] = players[i - playerNo];
+        for (int i = playerNo ; i < newPlayerNo ; ++i) {
+            newPlayerSet[i] = players[i - playerNo];
         }
 
         // update the playerSet to new arr
         // this array is dymanic 
-        this.playerSet = tempArr;
+        this.playerSet = newPlayerSet;
         // update the size
-        this.playerNo = newSize;
+        this.playerNo = newPlayerNo;
     }
 
 
+    // pretend all the player array is square matrix
     private final int maxInput() {
-        // pretend all the player array is square matrix
         int max = 0;
 
         // cursor
@@ -198,7 +203,7 @@ public class Host {
                 max = current;
             }
         }
-
+        // row size * column sizeß
         return max * max ;
     }
 

@@ -6,6 +6,7 @@
  *	Describe	:   Wrote a small test to test the size of array will or not
                     affect the result of bingo
  */
+
 package com.Test;
 import com.Bingo.*;
 
@@ -18,7 +19,9 @@ public class Test3 {
         };
 
         final int[][] cardTwo = {
-            {2}
+            {2,3}, 
+            {4,5,6},
+
         };
 
         // setup the two game
@@ -33,12 +36,15 @@ public class Test3 {
         testGameOne.update(1);
         testGameOne.Bingo();
 
-        testGameTwo.update(1);
+        testGameTwo.update(2);
+        testGameTwo.update(3);
+        testGameTwo.update(4);
+        testGameTwo.update(5);
         testGameTwo.Bingo();
 
         // check the result
-        System.out.println(testGameOne.endGame());
-        System.out.println(! testGameTwo.endGame());
+        System.out.println(testGameOne.isEndGame());
+        System.out.println(testGameTwo.isEndGame());
 
     }
 }

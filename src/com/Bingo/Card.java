@@ -13,6 +13,7 @@
  *  
  * 
  *  Create Date :   19-10-2021
+ *  Last Modify :   16-11-2021
  *
  */
 
@@ -32,11 +33,23 @@ public class Card {
         // checking if the array past in isn't a square matrix
         isSquareMatrix(arr);
 
-        // deep copy of the parameter
+        // the size of the array
+        this.SIZE = arr.length;
+
+        /* deep copy of the parameter
+         * if the array isn't square 
+         * will copy {arr.length * arr.length}'s value
+         * for example : 
+         * {2,3}
+         * {4,5,6}
+         *
+         * The result will be :
+         * {2,3}
+         * {4,5s}
+         */
+        
         this.cardArray = copyArr(arr);
 
-        // the size of the array
-        this.SIZE = this.cardArray.length;
     }
 
 
@@ -75,7 +88,7 @@ public class Card {
                     // update current
                     current = this.cardArray[row][column];
 
-                    // goto next row if one element isn't CROSS
+                    // goto next row early if one element isn't CROSS
                     if (! isCross(current))
                         continue NEXTROW; 
                 }
@@ -151,7 +164,7 @@ public class Card {
             if ( ! isCross(current) ) 
                 return false; 
         }
-
+        // all element to check is CROSS if function run till here
         return true;
     }
 
@@ -183,6 +196,7 @@ public class Card {
             if ( ! isCross(current) ) 
                 return false;
         }
+        // default
         return true;
     }
 
@@ -208,10 +222,11 @@ public class Card {
     {
 
         // serach where to update the value
-        // return empty array if not found
+        // return empty array if the element not found
         int[] targetIndex = this.searchIndex(target);
 
-        if ( isEmpty(targetIndex) ) 
+        if ( isEmpty(targetIndex) )
+            // nothing to update since parameter not in the array
 		    return; 
 
         int row = targetIndex[0];
@@ -229,10 +244,10 @@ public class Card {
             for (final int current : row) 
             { 
                 if ( current == CROSS ) 
-                    System.out.printf(" XX ");
+                    System.out.printf("  XX");
                 else
                     // formatting 
-                    System.out.printf(" %2d " ,  current);
+                    System.out.printf("%4d" ,  current);
             }
             // go to nextline of each row
             System.out.println();
@@ -264,6 +279,8 @@ public class Card {
      * return the index if element exist
      * else return a empty int[]
      * please remind that only return first match value
+     * 
+     * Btw this is linear search
      */
     private final int[] searchIndex (final int target)  
     {
@@ -296,17 +313,11 @@ public class Card {
     {
 
         // copy the value in the array to a new array
+        int[][] temp = new int[this.SIZE][this.SIZE]; // 2D arr
 
-        final int rowLen = arr.length;
-        int[][] temp = new int[rowLen][]; // 2D arr
-
-        for (int row = 0 ; row < rowLen ; ++row) 
+        for (int row = 0 ; row < this.SIZE ; ++row) 
         {
-            // get the len and create an 1D array] with size {len}
-            final int columnLen = arr[row].length;
-            temp[row] = new int[columnLen]; // 1D arr
-
-            for (int column = 0 ; column < columnLen ; ++column) 
+            for (int column = 0 ; column < this.SIZE ; ++column) 
             {
                 // copy by value not references
                 temp[row][column] = Integer.valueOf( arr[row] [column] );

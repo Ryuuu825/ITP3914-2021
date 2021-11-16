@@ -7,6 +7,8 @@
  *                      This file is the main game loop.
  *
  *  Create Date :       19-10-2021
+ *  Last Modify :       16-11-2021
+ *  
  */
 
 package com;
@@ -16,11 +18,12 @@ import java.util.Scanner;
 
 public class Main {
 
-// --------------------------[ Visible in this class ] ------------------------------
+// --------------------------[ Visible in this class ] ------------------------
 
     // for receive input
     public static Scanner sc = new Scanner(System.in);
     
+// --------------------------[ Main ] -----------------------------------------
 
     public static void main(String[] args) 
     {
@@ -46,21 +49,19 @@ public class Main {
 
         // set up a game which have two player
         Host gameOne = new Host(
-                new Player("Player 1" , cardOne ) ,
-                new Player("Player 2" , cardTwo )
+                new Player("Player1" , cardOne ) ,
+                new Player("Player2" , cardTwo )
             );
 
-
-
-//-------------------------- [ Main Game Loop ] ---------------------------------------------------
+//-------------------------- [ Game Loop ] ---------------------------------------------------
 
         // show the all player's card at the begining
         gameOne.showPlayersCard();
 
-        while ( ! gameOne.endGame() ) 
+        while ( ! gameOne.isEndGame() ) 
         {
             // prompt user
-            System.out.printf("Game Host call (0 to exit): \n");
+            System.out.printf("Game Host call (0 to exit): ");
             
             // keep receive input util have a valid input
             input = validInput(gameOne);
@@ -78,9 +79,6 @@ public class Main {
             // check does anyone bingo
             // prompt user and end the game if someone bingo
             gameOne.Bingo();
-
-
-
         }
 
         // close the scanenr before the program end
@@ -91,7 +89,7 @@ public class Main {
     }
 
 
-    // Keep loop util receive a valid input
+    // continue loop util receive a valid input
     public static int validInput(final Host game) 
     {
         int temp; 
@@ -102,17 +100,17 @@ public class Main {
                 temp = sc.nextInt();
                 
                 // exit signal inputted by user
-                // also count as valid input
+                // count as valid input
                 if ( temp == 0 ) { return 0 ; }
 
                 // check if the input is in the range
-                if ( ! game.isInRange(temp))
+                if ( ! game.isInRange(temp) )
                 {
                     System.out.println("The number must be between 1 to 25, please call again!");
                     continue;
                 }
                 // check if the input is inputted before
-                else if (game.isRepeatedInput(temp))
+                else if ( game.isRepeatedInput(temp) )
                 {
                     System.out.printf("The number %d is repeated, please call again!\n" , temp);
                     continue;

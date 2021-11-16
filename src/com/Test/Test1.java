@@ -4,7 +4,8 @@
  *	File 		: 	Test.java
  *	
  *	Describe	:   Wrote a small test to test some function use in Main
- *			        and see if they work as I expected.:wq
+ *			        and see if they work as I expected.
+                    This test class use the default test case.
  *  
  */
 
@@ -52,7 +53,7 @@ public class Test1 {
         for (int i = 0 ; i < input.length ; ++i) 
         {
             // check this two isn't expected 
-            if (i == 1) 
+            if (i == 0 || i == 1) 
             {
                 System.out.println( ! testGame.isInRange(input[i]) );
             }
@@ -66,6 +67,6 @@ public class Test1 {
 
         }
         // test does the game able to finish
-        System.out.println(testGame.endGame());
+        System.out.println(testGame.isEndGame());
     }
 }
