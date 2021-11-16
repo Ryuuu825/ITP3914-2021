@@ -106,7 +106,7 @@ public class Main {
                 // check if the input is in the range
                 if ( ! game.isInRange(temp) )
                 {
-                    System.out.println("The number must be between 1 to 25, please call again!");
+                    System.out.println("The number must be between 1 to 25, please call again!\n");
                     continue;
                 }
                 // check if the input is inputted before

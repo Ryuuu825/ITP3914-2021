@@ -73,7 +73,7 @@ public class Host {
         for (Player player : playerSet) 
         {
             // prompt user which player now
-            System.out.printf("%s's Card\n" , player);
+            System.out.printf("%s's Card :\n" , player);
 
             player.getCard().showCard();
 
