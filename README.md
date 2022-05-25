@@ -32,27 +32,12 @@ A player finds the selected numbers are arranged on their card in same row / col
 
 ## How to compile?
 
-### If you have GNU's make
-
-```
-make class
-```
-
-### else
-
 ```
 javac -d "./build" src/com/Main.java src/com/Bingo/*.java 
 ```
 
 ## How to run ?
 
-### If you have GNU's make
-
-```
-make excute
-```
-
-### else
 
 ``` 
 java -cp "./build" com.Main
